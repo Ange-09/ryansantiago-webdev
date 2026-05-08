@@ -1,6 +1,5 @@
 /* ─── Nav wrapper ───────────────────────────────────────────────────────────── */
 .nav {
-  position: fixed;
   top: 0;
   width: 100%;
   z-index: 50;
@@ -15,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 var(--spacing-container-px);
-  height: 5rem;
+  height: 4rem;
   max-width: 88rem;
   margin: 0 auto;
   width: 100%;
@@ -25,7 +24,7 @@
 .logo {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 1000;
   color: var(--color-accent-gold);
   letter-spacing: -0.04em;
   transition: opacity 0.2s ease;
@@ -33,6 +32,12 @@
 
 .logo:hover {
   opacity: 0.85;
+}
+
+/* ─── Text ──────────────────────────────────────────────────────────────────── */
+.rsdesc {
+  font-weight: 400;
+  font-size: 1.4rem;
 }
 
 /* ─── Desktop links ─────────────────────────────────────────────────────────── */
@@ -86,4 +91,166 @@
 
 .ctaButton:hover {
   opacity: 0.88;
+}
+
+/* ─── Piano button (mobile only) ────────────────────────────────────────────── */
+.pianoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-base);
+  transition: background-color 0.2s ease;
+}
+
+.pianoButton:hover {
+  background-color: rgba(200, 168, 74, 0.08);
+}
+
+@media (min-width: 768px) {
+  .pianoButton {
+    display: none;
+  }
+}
+
+/* ─── Piano icon ─────────────────────────────────────────────────────────────── */
+.pianoIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  width: 24px;
+  height: 22px;
+}
+
+.pianoKey {
+  display: block;
+  border-radius: 2px 0 0 2px;
+  transition:
+    width 0.18s ease,
+    background-color 0.18s ease;
+  transition-delay: var(--delay);
+}
+
+/* Wide key — full width, like a white piano key */
+.pianoKeyWide {
+  height: 3px;
+  width: 24px;
+  background-color: var(--color-text-muted);
+  margin-left: auto; /* ← anchors to the right */
+}
+
+/* Narrow key — shorter width, like a black piano key */
+.pianoKeyNarrow {
+  height: 3px;
+  width: 15px;
+  background-color: var(--color-accent-gold);
+  margin-left: auto; /* ← anchors to the right */
+}
+
+/* Pressed state */
+.pianoKeyWide.pianoKeyPressed {
+  width: 15px;
+  background-color: var(--color-accent-gold);
+}
+
+.pianoKeyNarrow.pianoKeyPressed {
+  width: 24px;
+  background-color: var(--color-text-primary);
+}
+
+/* ─── Overlay ────────────────────────────────────────────────────────────────── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background-color: rgba(4, 9, 15, 0.72);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlayVisible {
+  display: block;
+  opacity: 1;
+}
+
+/* ─── Mobile drawer ──────────────────────────────────────────────────────────── */
+.drawer {
+  position: fixed;
+  top: 4rem; /* height of the nav bar */
+  right: 0;
+  bottom: 0;
+  width: min(280px, 80vw);
+  z-index: 45;
+  background-color: var(--color-bg-surface);
+  border-left: var(--border-width) solid var(--color-border-ui);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 2rem 1.5rem;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .drawer,
+  .overlay {
+    display: none !important;
+  }
+}
+
+/* ─── Drawer links ───────────────────────────────────────────────────────────── */
+.drawerLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.drawerItem {
+  border-bottom: var(--border-width) solid var(--color-border-ui);
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity 0.3s ease calc(var(--i) * 0.06s + 0.1s),
+    transform 0.3s ease calc(var(--i) * 0.06s + 0.1s);
+}
+
+.drawerOpen .drawerItem {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Note: since drawerOpen is on the drawer, not the item's parent
+   in the CSS cascade, we use a global workaround via JS class above.
+   The animation is triggered by adding the class to the parent drawer. */
+
+.drawerLink {
+  display: block;
+  padding: 1.1rem 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-hint);
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.drawerLink:hover {
+  color: var(--color-text-primary);
+  padding-left: 0.5rem;
+}
+
+.drawerLinkActive {
+  composes: drawerLink;
+  color: var(--color-accent-gold);
 }
