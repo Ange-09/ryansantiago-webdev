@@ -1,220 +1,223 @@
-/* ─────────────────────────────────────────────
-   HeroSection.module.css
-   Midnight Jazz theme — Hero section
-───────────────────────────────────────────── */
-
-/* ── Layout ───────────────────────────────── */
-.hero {
+/* ─── Section wrapper ───────────────────────────────────────────────────────── */
+.section {
+  padding-top: 8rem;
+  padding-bottom: var(--spacing-section-gap);
+  padding-left: var(--spacing-container-px);
+  padding-right: var(--spacing-container-px);
+  max-width: 88rem;
+  margin: 0 auto;
+  width: 100%;
   position: relative;
-  background: var(--color-bg-base);
-  border-bottom: 0.5px solid var(--color-border);
-  padding: 96px 64px 80px;
-  overflow: hidden;
-  min-height: 480px;
+  z-index: 10;
+}
+
+/* ─── Two-column layout ─────────────────────────────────────────────────────── */
+.layout {
   display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section-gap);
+  min-height: 716px;
   align-items: center;
 }
 
-.inner {
-  position: relative;
-  z-index: 1;
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+  }
+}
+
+/* ─── Copy column ───────────────────────────────────────────────────────────── */
+.copy {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
-  max-width: 760px;
+  gap: 2rem;
 }
 
-/* ── Spotlight atmosphere ─────────────────── */
-.spotlightGold {
-  position: absolute;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 340px;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(200, 168, 74, 0.07) 0%,
-    transparent 68%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-.spotlightBlue {
-  position: absolute;
-  top: -40px;
-  left: 20%;
-  width: 480px;
-  height: 260px;
-  background: radial-gradient(
-    ellipse at 40% 0%,
-    rgba(180, 200, 255, 0.05) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Section tag ──────────────────────────── */
-.sectionTag {
-  font-size: 10px;
-  font-family: var(--font-sans);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  border: 0.5px solid rgba(200, 168, 74, 0.33);
-  border-radius: 4px;
-  padding: 3px 8px;
-  display: inline-block;
-  margin-bottom: 28px;
-}
-
-/* ── Name ─────────────────────────────────── */
-.name {
+/* ─── Heading ───────────────────────────────────────────────────────────────── */
+.heading {
   font-family: var(--font-display);
-  font-size: clamp(42px, 6vw, 60px);
+  font-size: var(--text-hero-name);
   font-weight: 700;
+  line-height: 1.1;
   color: var(--color-text-primary);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-  margin-bottom: 8px;
 }
 
-/* ── Role / Title ─────────────────────────── */
-.titleRole {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--color-gold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 18px;
+.headingAccent {
+  color: var(--color-accent-silver);
 }
 
-/* ── Tagline ──────────────────────────────── */
-.tagline {
-  font-family: var(--font-sans);
-  font-size: 16px;
+/* ─── Sub-copy ──────────────────────────────────────────────────────────────── */
+.subCopy {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
   line-height: 1.7;
   color: var(--color-text-muted);
-  max-width: 480px;
-  margin-bottom: 32px;
+  max-width: 28rem;
 }
 
-/* ── Divider ──────────────────────────────── */
-.divider {
-  width: 48px;
-  height: 0.5px;
-  background: linear-gradient(
-    90deg,
-    var(--color-gold),
-    transparent
-  );
-  margin-bottom: 32px;
-  border-radius: 2px;
-}
-
-/* ── CTA row ──────────────────────────────── */
+/* ─── CTA row ───────────────────────────────────────────────────────────────── */
 .ctaRow {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
-/* Primary button */
 .btnPrimary {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 500;
+  background-color: var(--color-accent-gold);
+  color: var(--color-bg-base);
+  font-family: var(--font-body);
+  font-size: var(--text-nav-link);
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-bg-base);
-  background: var(--color-gold);
-  border: none;
-  border-radius: 6px;
-  padding: 11px 24px;
-  cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.15s ease;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-base);
+  transition: opacity 0.2s ease;
 }
 
 .btnPrimary:hover {
   opacity: 0.88;
-  transform: translateY(-1px);
 }
 
-.btnPrimary:active {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* Secondary / ghost button */
-.btnSecondary {
-  font-family: var(--font-sans);
-  font-size: 12px;
+.btnGhost {
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-border-subtle);
+  color: var(--color-accent-silver);
+  font-family: var(--font-body);
+  font-size: var(--text-nav-link);
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-text-secondary);
-  background: transparent;
-  border: 0.5px solid var(--color-border-deep);
-  border-radius: 6px;
-  padding: 11px 24px;
-  cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-base);
+  transition: background-color 0.2s ease;
 }
 
-.btnSecondary:hover {
-  border-color: var(--color-silver);
+.btnGhost:hover {
+  background-color: var(--color-bg-surface);
+}
+
+/* ─── Visual column ─────────────────────────────────────────────────────────── */
+.visual {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .visual {
+    justify-content: flex-end;
+  }
+}
+
+/* ─── Featured card ─────────────────────────────────────────────────────────── */
+.featuredCard {
+  width: 100%;
+  max-width: 28rem;
+  aspect-ratio: 4 / 5;
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border-subtle);
+  padding: var(--spacing-card-padding);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover zoom on image inside card */
+.featuredCard:hover .featuredImage {
+  transform: scale(1.05);
+}
+
+/* ─── Tech pills (top-right overlay) ───────────────────────────────────────── */
+.techPills {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.techPill {
+  background-color: var(--color-bg-raised);
+  border: var(--border-width) solid var(--color-border-subtle);
+  color: var(--color-accent-silver);
+  font-family: var(--font-body);
+  font-size: var(--text-tech-pill);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* ─── Image + gradient overlay ─────────────────────────────────────────────── */
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(
+    to top,
+    var(--color-bg-surface) 0%,
+    transparent 55%
+  );
+  opacity: 0.9;
+}
+
+.featuredImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+/* ─── Card copy (bottom overlay) ───────────────────────────────────────────── */
+.cardCopy {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-card-padding);
+  z-index: 20;
+}
+
+.cardLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardLabelDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent-gold);
+  flex-shrink: 0;
+}
+
+.cardLabelText {
+  font-family: var(--font-body);
+  font-size: var(--text-section-tag);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-section-heading);
+  font-weight: 700;
   color: var(--color-text-primary);
-  transform: translateY(-1px);
+  margin-bottom: 0.5rem;
 }
 
-.btnSecondary:active {
-  transform: translateY(0);
-}
-
-/* ── Reveal animation (applied via JS) ───── */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-}
-
-.revealed {
-  animation: revealUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Responsive ───────────────────────────── */
-@media (max-width: 768px) {
-  .hero {
-    padding: 64px 24px 56px;
-    min-height: auto;
-  }
-
-  .spotlightGold {
-    width: 100%;
-  }
-
-  .ctaRow {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .btnPrimary,
-  .btnSecondary {
-    width: 100%;
-    text-align: center;
-  }
+.cardSub {
+  font-family: var(--font-body);
+  font-size: var(--text-code-label);
+  color: var(--color-text-muted);
 }

@@ -57,8 +57,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Script /> {/* Add Web Analytics Script If Applicable*/}
-        <main>{children}</main>
+        <Script />
+        {/* Atmospheric background spotlights */}
+        <div className="spotlight-gold" aria-hidden="true" />
+        <div className="spotlight-silver" aria-hidden="true" />
+ 
+        {children}
       </body>
     </html>
   );

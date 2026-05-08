@@ -1,89 +1,75 @@
-"use client";
+import Image from 'next/image';
+import styles from './HeroSection.module.css';
 
-import { useEffect, useRef } from "react";
-import styles from "./HeroSection.module.css";
+const TECH_PILLS = ['WebGL', 'React'] as const;
 
-interface HeroSectionProps {
-  name?: string;
-  title?: string;
-  tagline?: string;
-  ctaPrimaryLabel?: string;
-  ctaSecondaryLabel?: string;
-  onCtaPrimary?: () => void;
-  onCtaSecondary?: () => void;
-}
-
-export default function HeroSection({
-  name = "Your Name",
-  title = "Full-Stack Developer",
-  tagline = "Crafting digital experiences with precision and intent.",
-  ctaPrimaryLabel = "View Work",
-  ctaSecondaryLabel = "Get in Touch",
-  onCtaPrimary,
-  onCtaSecondary,
-}: HeroSectionProps) {
-  const containerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    // Staggered reveal on mount
-    const items = el.querySelectorAll<HTMLElement>(`.${styles.reveal}`);
-
-    items.forEach((item, i) => {
-      item.style.animationDelay = `${i * 120}ms`;
-      item.classList.add(styles.revealed);
-    });
-  }, []);
-
+export default function HeroSection() {
   return (
-    <section ref={containerRef} className={styles.hero} id="hero">
-      {/* Atmospheric spotlight layer */}
-      <div className={styles.spotlightGold} aria-hidden="true" />
-      <div className={styles.spotlightBlue} aria-hidden="true" />
+    <section id="work" className={styles.section} aria-labelledby="hero-heading">
+      <div className={styles.layout}>
+        {/* ── Copy column ── */}
+        <div className={styles.copy}>
+          {/* Heading */}
+          <h1 id="hero-heading" className={styles.heading}>
+            Curated for the
+            <br />
+            <span className={styles.headingAccent}>Midnight Hours.</span>
+          </h1>
 
-      <div className={styles.inner}>
-        {/* Section tag */}
-        <p className={`${styles.sectionTag} ${styles.reveal}`} aria-hidden="true">
-          01 — Hero
-        </p>
+          {/* Sub-copy */}
+          <p className={styles.subCopy}>
+            Atmospheric minimalism meets digital precision. Crafting experiences
+            that resonate in the quiet spaces between functionality and art.
+          </p>
 
-        {/* Name */}
-        <h1 className={`${styles.name} ${styles.reveal}`}>
-          {name}
-        </h1>
+          {/* CTA row */}
+          <div className={styles.ctaRow}>
+            <button className={styles.btnPrimary} type="button">
+              View Portfolio
+            </button>
+            <button className={styles.btnGhost} type="button">
+              Read Story
+            </button>
+          </div>
+        </div>
 
-        {/* Title */}
-        <p className={`${styles.titleRole} ${styles.reveal}`}>
-          {title}
-        </p>
+        {/* ── Visual column ── */}
+        <div className={styles.visual}>
+          <div className={styles.featuredCard}>
+            {/* Tech pills */}
+            <ul className={styles.techPills} aria-label="Technologies used">
+              {TECH_PILLS.map((pill) => (
+                <li key={pill} className={styles.techPill}>
+                  {pill}
+                </li>
+              ))}
+            </ul>
 
-        {/* Tagline */}
-        <p className={`${styles.tagline} ${styles.reveal}`}>
-          {tagline}
-        </p>
+            {/* Gradient overlay */}
+            <div className={styles.imageOverlay} aria-hidden="true" />
 
-        {/* Divider */}
-        <div className={`${styles.divider} ${styles.reveal}`} aria-hidden="true" />
+            {/* Featured image */}
+            <Image
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWbKGQnUCOjNpnTnooDxKok8iXm4J8j-aWAVdg0Traav_96kAR1UOfAV7RpQwLmodBB-I8lu_3CQuWTOPNHQB7DNr1mRbdh5kEY7TR2vDlk9Uzgbghpafp6y5ualJBL2h3tQCcDl8uhnxGTuXAwN0eLEGJmEeft2ydbArPVJcxtcCd991J7xYqUrPVJxgcWM0z76zC5lwKC96Cekb0LnJkjQS882E2Cywvu6m0xM-r2naJ5vWXhsG8mDKPR-FozapC7oQSOUD_0tSn"
+              alt="Echoes & Dust — a moody, cinematic high-end audio setup with dramatic low-key lighting, gold and silver reflections against deep navy shadows"
+              fill
+              className={styles.featuredImage}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
+            />
 
-        {/* CTA buttons */}
-        <div className={`${styles.ctaRow} ${styles.reveal}`}>
-          <button
-            className={styles.btnPrimary}
-            onClick={onCtaPrimary}
-            type="button"
-          >
-            {ctaPrimaryLabel}
-          </button>
-
-          <button
-            className={styles.btnSecondary}
-            onClick={onCtaSecondary}
-            type="button"
-          >
-            {ctaSecondaryLabel}
-          </button>
+            {/* Card copy */}
+            <div className={styles.cardCopy}>
+              <div className={styles.cardLabel}>
+                <span className={styles.cardLabelDot} aria-hidden="true" />
+                <span className={styles.cardLabelText}>Featured</span>
+              </div>
+              <h2 className={styles.cardTitle}>Echoes &amp; Dust</h2>
+              <p className={styles.cardSub}>
+                Interactive visualizer for modern jazz ensembles.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
