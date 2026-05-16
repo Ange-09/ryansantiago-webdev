@@ -1,25 +1,27 @@
-import Image from 'next/image';
-import styles from './HeroSection.module.css';
-
-const TECH_PILLS = ['WebGL', 'React'] as const;
+import Image from "next/image";
+import styles from "./HeroSection.module.css";
 
 export default function HeroSection() {
   return (
-    <section id="work" className={styles.section} aria-labelledby="hero-heading">
+    <section
+      id="work"
+      className={styles.section}
+      aria-labelledby="hero-heading"
+    >
       <div className={styles.layout}>
         {/* ── Copy column ── */}
         <div className={styles.copy}>
           {/* Heading */}
           <h1 id="hero-heading" className={styles.heading}>
-            Curated for the
+            Fine-tuning systems
             <br />
-            <span className={styles.headingAccent}>Midnight Hours.</span>
+            <span className={styles.headingAccent}>& composing solutions.</span>
           </h1>
 
           {/* Sub-copy */}
           <p className={styles.subCopy}>
-            Atmospheric minimalism meets digital precision. Crafting experiences
-            that resonate in the quiet spaces between functionality and art.
+            Industrial engineer and web developer bridging process design and
+            full-stack execution.
           </p>
 
           {/* CTA row */}
@@ -36,15 +38,6 @@ export default function HeroSection() {
         {/* ── Visual column ── */}
         <div className={styles.visual}>
           <div className={styles.featuredCard}>
-            {/* Tech pills */}
-            <ul className={styles.techPills} aria-label="Technologies used">
-              {TECH_PILLS.map((pill) => (
-                <li key={pill} className={styles.techPill}>
-                  {pill}
-                </li>
-              ))}
-            </ul>
-
             {/* Gradient overlay */}
             <div className={styles.imageOverlay} aria-hidden="true" />
 

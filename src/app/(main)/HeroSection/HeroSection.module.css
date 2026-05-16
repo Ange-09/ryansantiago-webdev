@@ -1,9 +1,6 @@
 /* ─── Section wrapper ───────────────────────────────────────────────────────── */
 .section {
-  padding-top: 8rem;
-  padding-bottom: var(--spacing-section-gap);
-  padding-left: var(--spacing-container-px);
-  padding-right: var(--spacing-container-px);
+  padding: 0 5%;
   max-width: 88rem;
   margin: 0 auto;
   width: 100%;

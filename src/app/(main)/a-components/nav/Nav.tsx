@@ -46,10 +46,7 @@ export default function Nav() {
         <div className={styles.inner}>
           {/* Logo */}
           <Link href="/" className={styles.logo} aria-label="RS — home">
-            <span className={styles.rs}>RS | </span>
-            <span className={styles.rsdesc}>
-              Building Systems That Create Impact
-            </span>
+            <span className={styles.rs}>RS</span>
           </Link>
 
           {/* Desktop navigation links */}
