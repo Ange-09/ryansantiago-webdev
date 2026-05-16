@@ -8,28 +8,23 @@
   z-index: 10;
 }
 
-/* ─── Two-column layout ─────────────────────────────────────────────────────── */
+/* ─── Layout ─────────────────────────────────────────────────────────────────── */
 .layout {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-section-gap);
   min-height: 716px;
   align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .layout {
-    flex-direction: row;
-  }
+  justify-content: center;
 }
 
 /* ─── Copy column ───────────────────────────────────────────────────────────── */
 .copy {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 2rem;
+  text-align: center;
+  max-width: 48rem;
 }
 
 /* ─── Heading ───────────────────────────────────────────────────────────────── */
@@ -48,8 +43,8 @@
 /* ─── Sub-copy ──────────────────────────────────────────────────────────────── */
 .subCopy {
   font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: 1.7;
+  font-size: 1.1rem;
+  line-height: 1.3;
   color: var(--color-text-muted);
   max-width: 28rem;
 }
@@ -59,7 +54,8 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .btnPrimary {
@@ -80,8 +76,8 @@
 }
 
 .btnGhost {
-  background-color: transparent;
-  border: var(--border-width) solid var(--color-border-subtle);
+  background-color: rgba(168, 192, 216, 0.06);
+  border: var(--border-width) solid var(--color-border-ui);
   color: var(--color-accent-silver);
   font-family: var(--font-body);
   font-size: var(--text-nav-link);
@@ -90,131 +86,12 @@
   text-transform: uppercase;
   padding: 1rem 2rem;
   border-radius: var(--radius-base);
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .btnGhost:hover {
-  background-color: var(--color-bg-surface);
-}
-
-/* ─── Visual column ─────────────────────────────────────────────────────────── */
-.visual {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-@media (min-width: 1024px) {
-  .visual {
-    justify-content: flex-end;
-  }
-}
-
-/* ─── Featured card ─────────────────────────────────────────────────────────── */
-.featuredCard {
-  width: 100%;
-  max-width: 28rem;
-  aspect-ratio: 4 / 5;
-  background-color: var(--color-bg-surface);
-  border-radius: var(--radius-lg);
-  border: var(--border-width) solid var(--color-border-subtle);
-  padding: var(--spacing-card-padding);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hover zoom on image inside card */
-.featuredCard:hover .featuredImage {
-  transform: scale(1.05);
-}
-
-/* ─── Tech pills (top-right overlay) ───────────────────────────────────────── */
-.techPills {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 20;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.techPill {
-  background-color: var(--color-bg-raised);
-  border: var(--border-width) solid var(--color-border-subtle);
-  color: var(--color-accent-silver);
-  font-family: var(--font-body);
-  font-size: var(--text-tech-pill);
-  padding: 2px 10px;
-  border-radius: var(--radius-pill);
-}
-
-/* ─── Image + gradient overlay ─────────────────────────────────────────────── */
-.imageOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: linear-gradient(
-    to top,
-    var(--color-bg-surface) 0%,
-    transparent 55%
-  );
-  opacity: 0.9;
-}
-
-.featuredImage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.7s ease;
-}
-
-/* ─── Card copy (bottom overlay) ───────────────────────────────────────────── */
-.cardCopy {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--spacing-card-padding);
-  z-index: 20;
-}
-
-.cardLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.cardLabelDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-accent-gold);
-  flex-shrink: 0;
-}
-
-.cardLabelText {
-  font-family: var(--font-body);
-  font-size: var(--text-section-tag);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-accent-gold);
-}
-
-.cardTitle {
-  font-family: var(--font-display);
-  font-size: var(--text-section-heading);
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.cardSub {
-  font-family: var(--font-body);
-  font-size: var(--text-code-label);
-  color: var(--color-text-muted);
+  background-color: rgba(168, 192, 216, 0.11);
+  border-color: var(--color-accent-silver);
 }

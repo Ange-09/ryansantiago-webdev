@@ -10,7 +10,7 @@
 
   /* Borders */
   --color-border-subtle: #1a3050;
-  --color-border-ui: #2a4a6a;
+  --color-border-ui: #3a5a7a;
 
   /* Accents */
   --color-accent-gold: #c8a84a;
@@ -29,7 +29,7 @@
   --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
 
   /* Type scale */
-  --text-hero-name: clamp(35px, 4vw, 50px);
+  --text-hero-name: clamp(40px, 4vw, 60px);
   --text-section-heading: 32px;
   --text-modal-title: 20px;
   --text-nav-link: 13px;
