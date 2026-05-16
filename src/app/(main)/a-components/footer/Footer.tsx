@@ -7,7 +7,7 @@ interface SocialLink {
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
-  { label: "Instagram", href: "#" },
+  { label: "Instagram", href: "https://www.google.com.ph/index.html" },
   { label: "LinkedIn", href: "#" },
   { label: "GitHub", href: "#" },
 ];
@@ -18,7 +18,7 @@ export default function Footer() {
       <div className={styles.inner}>
         {/* Brand */}
         <Link href="/" className={styles.brand} aria-label="VERVE — home">
-          RY
+          RS
         </Link>
 
         {/* Copyright */}
@@ -28,7 +28,12 @@ export default function Footer() {
         <ul className={styles.socials} aria-label="Social links">
           {SOCIAL_LINKS.map(({ label, href }) => (
             <li key={label}>
-              <Link href={href} className={styles.socialLink}>
+              <Link
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.socialLink}
+              >
                 {label}
               </Link>
             </li>
