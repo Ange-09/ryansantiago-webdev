@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import styles from './Footer.module.css';
+import Link from "next/link";
+import styles from "./Footer.module.css";
 
 interface SocialLink {
   label: string;
@@ -7,10 +7,9 @@ interface SocialLink {
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'Instagram', href: '#' },
-  { label: 'LinkedIn',  href: '#' },
-  { label: 'Dribbble',  href: '#' },
-  { label: 'GitHub',    href: '#' },
+  { label: "Instagram", href: "#" },
+  { label: "LinkedIn", href: "#" },
+  { label: "GitHub", href: "#" },
 ];
 
 export default function Footer() {
@@ -19,13 +18,11 @@ export default function Footer() {
       <div className={styles.inner}>
         {/* Brand */}
         <Link href="/" className={styles.brand} aria-label="VERVE — home">
-          VERVE
+          RY
         </Link>
 
         {/* Copyright */}
-        <p className={styles.copyright}>
-          &copy; 2024 VERVE Studio. Curated for the midnight hours.
-        </p>
+        <p className={styles.copyright}>&copy; 2026 Ryan Santiago</p>
 
         {/* Social links */}
         <ul className={styles.socials} aria-label="Social links">

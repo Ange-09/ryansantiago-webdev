@@ -11,7 +11,7 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  padding: var(--spacing-section-gap) var(--spacing-container-px);
+  padding: 1rem 5%;
   max-width: 88rem;
   margin: 0 auto;
   width: 100%;
@@ -19,8 +19,22 @@
 
 @media (min-width: 768px) {
   .inner {
+    position: relative;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .copyright {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .brand,
+  .socials {
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -62,7 +76,9 @@
   letter-spacing: 0.06em;
   color: var(--color-text-muted);
   opacity: 0.8;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .socialLink:hover {
