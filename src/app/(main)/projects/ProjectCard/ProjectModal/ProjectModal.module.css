@@ -35,15 +35,6 @@
   }
 }
 
-@keyframes vinylSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* ── Overlay ───────────────────────────────────────────────────────────────── */
 
 .overlay {
@@ -137,7 +128,6 @@
   opacity: 1;
   background: var(--bg-surface, #0a1828);
 
-  /* subtle spotlight */
   background-image: radial-gradient(
     ellipse 60% 50% at 30% 30%,
     rgba(200, 168, 74, 0.04) 0%,
@@ -151,10 +141,6 @@
     border-bottom: none;
     border-right: 0.5px solid var(--border-subtle, #1a3050);
   }
-}
-
-.contentVisible {
-  opacity: 1;
 }
 
 /* ── Tag ── */
@@ -311,7 +297,6 @@
   justify-content: center;
   overflow: hidden;
 
-  /* subtle grid */
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
@@ -429,12 +414,6 @@
   box-shadow: 6px 8px 24px rgba(0, 0, 0, 0.55);
 }
 
-/* These phase classes are no-ops now — sleeve stays visible */
-.sleeveOut {
-}
-.sleeveGone {
-}
-
 .sleeveSpine {
   position: absolute;
   inset-block: 0;
@@ -472,22 +451,3 @@
   inset: 0;
   background: linear-gradient(to top, rgba(7, 16, 31, 0.5) 0%, transparent 60%);
 }
-
-/* ── Vinyl record ───────────────────────────────────────────────────────────── */
-
-.vinyl {
-  position: absolute;
-  z-index: 10;
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
-}
-
-/* Phase classes are no-ops — vinyl is always centered and visible */
-.vinylOut {
-}
-.vinylCenter {
-}
-.vinylOpen {
-}
-
-/* vinylSpin is applied via className on the SVG when spinning=true */

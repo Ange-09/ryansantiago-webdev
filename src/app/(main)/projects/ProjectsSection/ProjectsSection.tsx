@@ -13,7 +13,6 @@ export default function ProjectsSection() {
     <section className={styles.section} id="work" aria-label="Projects">
       {/* Section header */}
       <header className={styles.header}>
-        <span className={styles.sectionTag}>02 — Work</span>
         <h1 className={styles.heading}>Selected projects</h1>
         <p className={styles.sub}>
           A curated shelf of recent work — click any cover to unpack the

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { VinylDisc, type Project } from "../ProjectCard";
+import { type Project } from "../ProjectCard";
 import styles from "./ProjectModal.module.css";
 
 interface ProjectModalProps {
@@ -13,21 +13,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [visible, setVisible] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  /* ── Open ───────────────────────────────────────────────────────────────── */
   useEffect(() => {
     if (!project) return;
     setVisible(true);
     document.body.style.overflow = "hidden";
   }, [project]);
 
-  /* ── Close ──────────────────────────────────────────────────────────────── */
   function handleClose() {
     document.body.style.overflow = "";
     setVisible(false);
     onClose();
   }
 
-  /* ── Keyboard ───────────────────────────────────────────────────────────── */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && visible) handleClose();
@@ -48,16 +45,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       aria-label={`Project: ${project.title}`}
     >
       <div className={`${styles.panel} ${styles.panelVisible}`}>
-        {/* ── Close ── */}
         <button
           className={styles.closeBtn}
           onClick={handleClose}
           aria-label="Close modal"
         >
-          <span aria-hidden="true">✕</span>
+          ✕
         </button>
 
-        {/* ── LEFT — text content ── */}
+        {/* LEFT CONTENT */}
         <div className={`${styles.content} ${styles.contentVisible}`}>
           <div className={styles.tagRow}>
             <span
@@ -69,7 +65,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           <h2 className={styles.title}>{project.title}</h2>
           <p className={styles.volume}>{project.volume}</p>
-
           <p className={styles.desc}>{project.description}</p>
 
           <div className={styles.techBlock}>
@@ -89,7 +84,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
         </div>
 
-        {/* ── RIGHT — turntable stage ── */}
+        {/* RIGHT STAGE */}
         <div className={styles.stage}>
           <div className={styles.turntableBase}>
             <div className={styles.turntablePlatter} />
@@ -103,9 +98,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
           </div>
 
-          {/* ── Album sleeve ── */}
+          {/* SLEEVE */}
           <div className={styles.sleeve} aria-hidden="true">
             <div className={styles.sleeveSpine} />
+
             {project.imageUrl ? (
               <img
                 src={project.imageUrl}
@@ -129,12 +125,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </span>
               </div>
             )}
-            <div className={styles.sleeveOverlay} />
-          </div>
 
-          {/* ── Vinyl disc ── */}
-          <div className={styles.vinyl} aria-hidden="true">
-            <VinylDisc size={260} isFeatured={project.isFeatured} spinning />
+            <div className={styles.sleeveOverlay} />
           </div>
         </div>
       </div>
