@@ -1,0 +1,51 @@
+/* ProjectsSection.module.css */
+
+.section {
+  padding: 80px 40px 120px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 64px;
+}
+
+.sectionTag {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-gold, #c8a84a);
+  margin-bottom: 14px;
+}
+
+.heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--text-primary, #d4e4f8);
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+.sub {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  color: var(--text-muted, #5a7a9a);
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 40px 32px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

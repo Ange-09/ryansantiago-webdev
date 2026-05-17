@@ -1,0 +1,356 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ProjectCard.module.css — Midnight Jazz · Album shelf card + interactions
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes vinylPeekIn {
+  from {
+    opacity: 0;
+    transform: translateX(30%) scale(0.82) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(34%) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes sheenSwipe {
+  from { transform: translateX(-120%) skewX(-20deg); }
+  to   { transform: translateX(220%) skewX(-20deg); }
+}
+
+@keyframes hintFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Card wrapper ──────────────────────────────────────────────────────────── */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  outline: none;
+
+  /* 3-D tilt via CSS custom props set from JS */
+  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.18s ease-out;
+  will-change: transform;
+}
+
+.card:focus-visible .coverWrap {
+  box-shadow: 0 0 0 2px #c8a84a88;
+}
+
+/* ── Cover wrapper ─────────────────────────────────────────────────────────── */
+
+.coverWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 0.5px solid var(--border-subtle, #1a3050);
+  background: var(--bg-base, #07101f);
+
+  /* elevation shadow */
+  box-shadow:
+    6px 8px 24px rgba(0, 0, 0, 0.55),
+    inset 2px 0 0 rgba(255, 255, 255, 0.04);
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+
+.card:hover .coverWrap {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    10px 20px 40px rgba(0, 0, 0, 0.7),
+    0 0 0 0.5px #c8a84a44,
+    inset 2px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+/* featured card: slightly larger lift */
+.featured .coverWrap {
+  box-shadow:
+    6px 8px 24px rgba(0, 0, 0, 0.55),
+    0 0 0 0.5px #c8a84a33,
+    inset 2px 0 0 rgba(255, 255, 255, 0.06);
+}
+.featured:hover .coverWrap {
+  box-shadow:
+    14px 24px 48px rgba(0, 0, 0, 0.75),
+    0 0 0 0.5px #c8a84a88,
+    inset 2px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ── Record spine (left edge highlight) ────────────────────────────────────── */
+
+.spine {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 4%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.12) 25%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-right: 0.5px solid rgba(255, 255, 255, 0.04);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Cover image ───────────────────────────────────────────────────────────── */
+
+.coverImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  filter: grayscale(1);
+  transition:
+    opacity 0.5s ease,
+    filter 0.5s ease;
+}
+
+.card:hover .coverImg {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+/* ── Initials fallback cover ───────────────────────────────────────────────── */
+
+.coverFallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--cover-gradient, linear-gradient(135deg, #0d2040, #1a3a60));
+}
+
+.coverInitials {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.14);
+  letter-spacing: 0.04em;
+  user-select: none;
+}
+
+.coverLine {
+  display: block;
+  width: 48%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.coverLineSm {
+  width: 32%;
+  height: 3px;
+}
+
+/* ── Gradient overlay ──────────────────────────────────────────────────────── */
+
+.coverOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(7, 16, 31, 0.92) 0%,
+    rgba(7, 16, 31, 0.2) 45%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Tag badge ─────────────────────────────────────────────────────────────── */
+
+.badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  background: rgba(10, 24, 40, 0.82);
+  backdrop-filter: blur(6px);
+  border: 0.5px solid var(--border-subtle, #1a3050);
+  border-radius: 2px;
+  padding: 4px 10px;
+  transition: border-color 0.3s ease;
+}
+
+.badgeFeatured {
+  border-color: rgba(200, 168, 74, 0.35);
+}
+
+.card:hover .badgeFeatured {
+  border-color: rgba(200, 168, 74, 0.65);
+}
+
+.badgeText {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-gold, #c8a84a);
+}
+
+.badge:not(.badgeFeatured) .badgeText {
+  color: var(--text-muted, #5a7a9a);
+}
+
+/* ── Cover bottom meta ─────────────────────────────────────────────────────── */
+
+.coverMeta {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 5;
+}
+
+.coverTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 700;
+  color: var(--text-primary, #d4e4f8);
+  line-height: 1.2;
+  margin: 0 0 4px;
+
+  /* slide up on hover */
+  transform: translateY(4px);
+  transition: transform 0.35s ease;
+}
+
+.card:hover .coverTitle {
+  transform: translateY(0);
+}
+
+.coverVolume {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted, #5a7a9a);
+  margin: 0;
+  opacity: 0.75;
+}
+
+/* ── Vinyl peek (slides in from the right on hover) ────────────────────────── */
+
+.vinylPeek {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 3;
+  transform: translate(50%, -50%) scale(0.8) rotate(-8deg);
+  opacity: 0;
+  transition:
+    opacity 0.1s ease,
+    transform 0.1s ease;
+  pointer-events: none;
+}
+
+.card:hover .vinylPeek {
+  animation: vinylPeekIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Sheen sweep (one-shot on hover) ───────────────────────────────────────── */
+
+.sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 100%
+  );
+  transform: translateX(-120%) skewX(-20deg);
+  opacity: 0;
+}
+
+.card:hover .sheen::after {
+  animation: sheenSwipe 0.65s ease forwards;
+  opacity: 1;
+}
+
+/* ── Shelf line & shadow ───────────────────────────────────────────────────── */
+
+.shelfLine {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #0d1e33,
+    #1a3050 25%,
+    rgba(200, 168, 74, 0.18) 50%,
+    #1a3050 75%,
+    #0d1e33
+  );
+  border-radius: 0 0 2px 2px;
+  opacity: 0.9;
+}
+
+.shelfShadow {
+  width: 98%;
+  height: 8px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Hover hint ────────────────────────────────────────────────────────────── */
+
+.hint {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-hint, #3a5a7a);
+  text-transform: uppercase;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+}
+
+.card:hover .hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Vinyl spin (used on VinylDisc when spinning prop=true) ────────────────── */
+
+.vinylSpin {
+  animation: vinylSpin 3.5s linear infinite;
+  transform-origin: center center;
+}

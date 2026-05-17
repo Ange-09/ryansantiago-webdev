@@ -1,0 +1,493 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ProjectModal.module.css — Midnight Jazz · Vinyl unpack modal
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
+
+@keyframes overlayFadeIn {
+  from {
+    background-color: rgba(4, 9, 15, 0);
+    backdrop-filter: blur(0);
+  }
+  to {
+    background-color: rgba(4, 9, 15, 0.92);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    background-color: rgba(4, 9, 15, 0.92);
+  }
+  to {
+    background-color: rgba(4, 9, 15, 0);
+  }
+}
+
+@keyframes panelPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes vinylSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Overlay ───────────────────────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.overlayVisible {
+  animation: overlayFadeIn 0.35s ease forwards;
+}
+
+.overlayHidden {
+  animation: overlayFadeOut 0.28s ease forwards;
+  pointer-events: none;
+}
+
+/* ── Panel ─────────────────────────────────────────────────────────────────── */
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  background: var(--bg-surface, #0a1828);
+  border: 0.5px solid var(--border-ui, #2a4a6a);
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 0.5px rgba(200, 168, 74, 0.12);
+}
+
+@media (min-width: 768px) {
+  .panel {
+    flex-direction: row;
+  }
+}
+
+.panelVisible {
+  animation: panelPopIn 0.22s ease-out forwards;
+}
+
+/* ── Close button ──────────────────────────────────────────────────────────── */
+
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 50;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0.5px solid var(--border-subtle, #1a3050);
+  background: var(--bg-raised, #0d1e33);
+  color: var(--text-muted, #5a7a9a);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.closeBtn:hover {
+  color: var(--accent-gold, #c8a84a);
+  border-color: rgba(200, 168, 74, 0.4);
+  background: rgba(200, 168, 74, 0.08);
+}
+
+/* ── Left content ──────────────────────────────────────────────────────────── */
+
+.content {
+  flex: 1;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  border-bottom: 0.5px solid var(--border-subtle, #1a3050);
+  opacity: 1;
+  background: var(--bg-surface, #0a1828);
+
+  /* subtle spotlight */
+  background-image: radial-gradient(
+    ellipse 60% 50% at 30% 30%,
+    rgba(200, 168, 74, 0.04) 0%,
+    transparent 70%
+  );
+}
+
+@media (min-width: 768px) {
+  .content {
+    max-width: 440px;
+    border-bottom: none;
+    border-right: 0.5px solid var(--border-subtle, #1a3050);
+  }
+}
+
+.contentVisible {
+  opacity: 1;
+}
+
+/* ── Tag ── */
+
+.tagRow {
+  margin-bottom: 20px;
+}
+
+.tag {
+  display: inline-block;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted, #5a7a9a);
+  border: 0.5px solid var(--border-subtle, #1a3050);
+  border-radius: 2px;
+  padding: 4px 10px;
+  background: var(--bg-raised, #0d1e33);
+}
+
+.tagFeatured {
+  color: var(--accent-gold, #c8a84a);
+  border-color: rgba(200, 168, 74, 0.3);
+  background: rgba(200, 168, 74, 0.06);
+}
+
+/* ── Title / volume ── */
+
+.title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 700;
+  color: var(--text-primary, #d4e4f8);
+  line-height: 1.15;
+  margin: 0 0 6px;
+}
+
+.volume {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted, #5a7a9a);
+  margin: 0 0 20px;
+}
+
+/* ── Description ── */
+
+.desc {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-muted, #6a8faa);
+  margin: 0 0 28px;
+}
+
+/* ── Tech pills ── */
+
+.techBlock {
+  margin-bottom: 28px;
+}
+
+.techLabel {
+  display: block;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-hint, #3a5a7a);
+  border-bottom: 0.5px solid var(--border-subtle, #1a3050);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.techPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: var(--accent-silver, #a8c0d8);
+  background: var(--bg-raised, #0d1e33);
+  border: 0.5px solid var(--border-subtle, #1a3050);
+  border-radius: 9px;
+  padding: 5px 14px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Action buttons ── */
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #07101f;
+  background: var(--accent-gold, #c8a84a);
+  border: none;
+  border-radius: 6px;
+  padding: 11px 22px;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btnPrimary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.btnGhost {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-silver, #a8c0d8);
+  background: transparent;
+  border: 0.5px solid var(--border-ui, #2a4a6a);
+  border-radius: 6px;
+  padding: 11px 22px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btnGhost:hover {
+  border-color: var(--accent-silver, #a8c0d8);
+  color: var(--text-primary, #d4e4f8);
+  transform: translateY(-1px);
+}
+
+/* ── Right stage ───────────────────────────────────────────────────────────── */
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 360px;
+  background: #080f1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  /* subtle grid */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-color: #080f1c;
+}
+
+/* ── Turntable ── */
+
+.turntableBase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.turntablePlatter {
+  position: absolute;
+  width: min(300px, 80%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #111a24;
+  border: 0.5px solid #2a3a4a;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
+}
+
+.turntableInner {
+  position: absolute;
+  width: min(240px, 65%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #0d151e;
+  border: 0.5px solid #1a2a3a;
+}
+
+.spindle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3a4a5a;
+  border: 0.5px solid #5a6a7a;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spindleCore {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a2a3a;
+}
+
+.tonearmBase {
+  position: absolute;
+  top: 12%;
+  right: 6%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1a2a3a;
+  border: 0.5px solid #3a4a5a;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tonearmPivot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3a4a5a;
+}
+
+.tonearm {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 130px;
+  height: 3px;
+  background: linear-gradient(to bottom, #4a5a6a, #2a3a4a);
+  transform-origin: left center;
+  transform: rotate(58deg);
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.tonearm::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: -10px;
+  width: 12px;
+  height: 22px;
+  background: #1a2a3a;
+  border: 0.5px solid #3a4a5a;
+  border-radius: 2px;
+  transform: rotate(-14deg);
+}
+
+/* ── Sleeve ─────────────────────────────────────────────────────────────────── */
+
+.sleeve {
+  position: absolute;
+  width: min(260px, 70%);
+  aspect-ratio: 1;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 0.5px solid var(--border-subtle, #1a3050);
+  z-index: 20;
+  box-shadow: 6px 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+/* These phase classes are no-ops now — sleeve stays visible */
+.sleeveOut {
+}
+.sleeveGone {
+}
+
+.sleeveSpine {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 4%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.07), transparent);
+  z-index: 10;
+}
+
+.sleeveImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sleeveFallback {
+  width: 100%;
+  height: 100%;
+  background: var(--cover-gradient, linear-gradient(135deg, #0d2040, #1a3a60));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sleeveInitials {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.12);
+  user-select: none;
+}
+
+.sleeveOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 16, 31, 0.5) 0%, transparent 60%);
+}
+
+/* ── Vinyl record ───────────────────────────────────────────────────────────── */
+
+.vinyl {
+  position: absolute;
+  z-index: 10;
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Phase classes are no-ops — vinyl is always centered and visible */
+.vinylOut {
+}
+.vinylCenter {
+}
+.vinylOpen {
+}
+
+/* vinylSpin is applied via className on the SVG when spinning=true */
