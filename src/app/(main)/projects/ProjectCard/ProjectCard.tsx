@@ -2,22 +2,7 @@
 
 import { useRef, useState } from "react";
 import styles from "./ProjectCard.module.css";
-
-export interface Project {
-  id: string;
-  title: string;
-  tag: string;
-  volume: string;
-  description: string;
-  tech: string[];
-  /** URL for the cover image — omit to render the initials fallback */
-  imageUrl?: string;
-  /** Two-letter initials shown when no imageUrl is provided */
-  initials?: string;
-  /** CSS gradient string for the initials fallback background */
-  coverGradient?: string;
-  isFeatured?: boolean;
-}
+import type { Project } from "../ProjectsSection/ProjectData";
 
 interface ProjectCardProps {
   project: Project;
