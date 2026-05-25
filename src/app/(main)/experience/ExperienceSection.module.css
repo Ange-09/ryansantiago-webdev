@@ -1,3 +1,18 @@
+/* ═══════════════════════════════════════════════
+   ExperienceSection.module.css
+   All component styles co-located in one file.
+   Sections: Section shell → Gatefold → Block header
+   → Groove wrap → Track entry → Subsections
+   → Bullets → Featured track → Education track
+   → Org track → Credits block → Disc divider
+   → Responsive
+═══════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────
+   Section shell & atmosphere
+───────────────────────────────────────────── */
+
 .section {
   position: relative;
   background: #07101f;
@@ -5,14 +20,13 @@
   overflow: hidden;
 }
 
-/* ── Atmospheric spotlight ── */
 .spotlight {
   position: absolute;
   top: -60px;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
-  height: 300px;
+  width: 700px;
+  height: 320px;
   background: radial-gradient(
     ellipse at 50% 0%,
     rgba(200, 168, 74, 0.07) 0%,
@@ -22,9 +36,8 @@
   pointer-events: none;
 }
 
-/* ── Layout ── */
 .inner {
-  max-width: 860px;
+  max-width: 880px;
   margin: 0 auto;
   padding: 0 32px;
 }
@@ -34,10 +47,10 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #c8a84a;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
 }
 
-.heading {
+.sectionHeading {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 32px;
   font-weight: 700;
@@ -46,7 +59,11 @@
   line-height: 1.2;
 }
 
-/* ── Gatefold surface ── */
+
+/* ─────────────────────────────────────────────
+   Gatefold surface
+───────────────────────────────────────────── */
+
 .gatefold {
   background: #0a1828;
   border: 0.5px solid #1a3050;
@@ -57,25 +74,49 @@
   gap: 0;
 }
 
-/* ── Block (Professional / Education) ── */
-.block {
+
+/* ─────────────────────────────────────────────
+   Block header  ("Professional Work", "Education" …)
+───────────────────────────────────────────── */
+
+.blockHeader {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
-.blockLabel {
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #3a5a7a;
-  margin: 0 0 20px 48px;
+.blockHeaderTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #a8c0d8;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  margin: 0;
+  flex-shrink: 0;
 }
 
-/* ── Groove line wrap ── */
+.blockHeaderRule {
+  display: block;
+  flex: 1;
+  height: 0.5px;
+  background: linear-gradient(90deg, #1a3050, transparent);
+}
+
+.blockHeaderRule:first-child {
+  background: linear-gradient(270deg, #1a3050, transparent);
+}
+
+
+/* ─────────────────────────────────────────────
+   Groove wrap — contains the vertical groove line
+   and all track entries within a block
+───────────────────────────────────────────── */
+
 .grooveWrap {
   position: relative;
-  padding-left: 0;
+  margin-bottom: 8px;
 }
 
 .grooveLine {
@@ -87,24 +128,387 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    #1a3050 8%,
-    #1a3050 92%,
+    #1a3050 6%,
+    #1a3050 94%,
     transparent 100%
   );
   pointer-events: none;
 }
 
-/* ── Responsive ── */
+
+/* ─────────────────────────────────────────────
+   Track entry (shared shell for all entry types)
+───────────────────────────────────────────── */
+
+.trackEntry {
+  display: flex;
+  gap: 0;
+  padding: 20px 0;
+  border-bottom: 0.5px solid #0e1e30;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  cursor: default;
+}
+
+.trackEntry:last-child {
+  border-bottom: none;
+  padding-bottom: 4px;
+}
+
+.trackEntry:first-child {
+  padding-top: 4px;
+}
+
+/* When hovered: lift the whole entry into focus */
+.trackEntryHovered {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+/* When any sibling is hovered, dim others via parent group.
+   Applied by toggling a class on .grooveWrap via JS is ideal,
+   but since we keep state per-entry, we use opacity on body
+   text to achieve the "focus" effect without JS on the parent. */
+.trackEntryHovered .companyName {
+  color: #eef4ff;
+}
+
+.trackEntryHovered .roleLabel {
+  color: #7a9ab8;
+}
+
+.trackEntryHovered .bulletItem {
+  color: #8aaec8;
+}
+
+.trackEntryHovered .subsectionTitle {
+  color: #c8a84a;
+}
+
+.trackEntryHovered .period {
+  color: #5a7a9a;
+}
+
+.trackEntryHovered .featuredTrack {
+  border-left-color: rgba(200, 168, 74, 0.65);
+  background: rgba(200, 168, 74, 0.07);
+}
+
+
+/* ─────────────────────────────────────────────
+   Track margin column (ID + dot)
+───────────────────────────────────────────── */
+
+.trackMargin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 52px;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+
+.trackId {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  color: #3a5a7a;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.grooveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a3050;
+  border: 0.5px solid #2a4a6a;
+  flex-shrink: 0;
+  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.grooveDotActive {
+  background: #c8a84a;
+  border-color: #c8a84a;
+  box-shadow: 0 0 8px rgba(200, 168, 74, 0.4);
+}
+
+
+/* ─────────────────────────────────────────────
+   Track body
+───────────────────────────────────────────── */
+
+.trackBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.entryHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.entryHeaderRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.companyName {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #d4e4f8;
+  line-height: 1.3;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.roleLabel {
+  font-size: 12px;
+  color: #5a7a9a;
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+}
+
+.period {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  color: #3a5a7a;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.entryType {
+  font-size: 9px;
+  color: #2a4a6a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+/* ─────────────────────────────────────────────
+   Subsections (multi-role within one position)
+───────────────────────────────────────────── */
+
+.subsections {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subsectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #7a9ab8;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  transition: color 0.2s ease;
+}
+
+/* Thin rule under subsection title */
+.subsectionTitle::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 0.5px;
+  background: #1a3050;
+  margin-top: 4px;
+}
+
+
+/* ─────────────────────────────────────────────
+   Bullet lists (shared)
+───────────────────────────────────────────── */
+
+.bulletList {
+  list-style: disc;
+  padding-left: 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bulletItem {
+  font-size: 13px;
+  color: #6a8faa;
+  line-height: 1.65;
+  padding-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.bulletItem::marker {
+  color: #2a4a6a;
+  font-size: 10px;
+}
+
+
+/* ─────────────────────────────────────────────
+   Featured track callout
+───────────────────────────────────────────── */
+
+.featuredTrack {
+  margin-top: 14px;
+  border-left: 1.5px solid rgba(200, 168, 74, 0.35);
+  border-radius: 0 4px 4px 0;
+  background: rgba(200, 168, 74, 0.04);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-left-color 0.2s ease, background 0.2s ease;
+}
+
+.featuredLabel {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200, 168, 74, 0.5);
+}
+
+.featuredDesc {
+  font-size: 12px;
+  color: #5a7a9a;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* ─────────────────────────────────────────────
+   Credits block (certifications)
+───────────────────────────────────────────── */
+
+.creditsBlock {
+  background: #0d1e33;
+  border: 0.5px solid #1a3050;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-top: 16px;
+}
+
+.creditsLabel {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3a5a7a;
+  margin: 0 0 14px;
+}
+
+.creditsGrid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 28px;
+}
+
+.certItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.certName {
+  font-size: 11px;
+  color: #a8c0d8;
+  line-height: 1.4;
+}
+
+.certIssuer {
+  font-size: 10px;
+  color: #3a5a7a;
+  letter-spacing: 0.04em;
+}
+
+
+/* ─────────────────────────────────────────────
+   Disc divider
+───────────────────────────────────────────── */
+
+.discDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 24px 52px;
+}
+
+.discLine {
+  flex: 1;
+  height: 0.5px;
+  background: linear-gradient(90deg, #1a3050, transparent);
+}
+
+.discDivider svg {
+  flex-shrink: 0;
+}
+
+
+/* ─────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────── */
+
 @media (max-width: 640px) {
   .inner {
     padding: 0 16px;
   }
 
   .gatefold {
-    padding: 24px 16px;
+    padding: 24px 14px;
   }
 
-  .heading {
+  .sectionHeading {
     font-size: 26px;
+  }
+
+  .creditsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .entryHeader {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .entryHeaderRight {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .trackMargin {
+    width: 40px;
+  }
+
+  .grooveLine {
+    left: 24px;
+  }
+
+  .discDivider {
+    margin-left: 40px;
   }
 }
