@@ -1,0 +1,48 @@
+.block {
+  background: #0d1e33;
+  border: 0.5px solid #1a3050;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 8px;
+}
+
+.label {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3a5a7a;
+  margin: 0 0 12px;
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cert {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.certName {
+  font-size: 11px;
+  color: #a8c0d8;
+  line-height: 1.4;
+}
+
+.certIssuer {
+  font-size: 10px;
+  color: #3a5a7a;
+  letter-spacing: 0.04em;
+}

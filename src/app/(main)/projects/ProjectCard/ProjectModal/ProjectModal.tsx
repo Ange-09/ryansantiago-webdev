@@ -92,9 +92,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           <div className={styles.actions}>
-            {project.webUrl ? (
+            {project.projImg ? (
               <a
-                href={project.webUrl}
+                href={project.projImg}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.btnPrimary}
@@ -107,31 +107,23 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
         </div>
 
-        {/* RIGHT — Live preview iframe */}
+        {/* RIGHT — Project image */}
         <div className={styles.preview}>
-          {project.webUrl ? (
-            <iframe
-              src={project.webUrl}
-              title={`Live preview of ${project.title}`}
-              className={styles.iframe}
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              loading="lazy"
-            />
+          {project.projImg ? (
+            <>
+              <img
+                src={project.projImg}
+                alt={`${project.title} preview`}
+                className={styles.previewImg}
+                draggable={false}
+              />
+              <div className={styles.previewOverlay} />
+            </>
           ) : (
-            <div className={styles.iframeFallback}>
-              {project.imageUrl ? (
-                <img
-                  src={project.imageUrl}
-                  alt={`${project.title} preview`}
-                  className={styles.iframeFallbackImg}
-                  draggable={false}
-                />
-              ) : null}
-              <div className={styles.iframeFallbackOverlay}>
-                <span className={styles.iframeFallbackText}>
-                  Live preview unavailable
-                </span>
-              </div>
+            <div className={styles.previewFallback}>
+              <span className={styles.previewFallbackInitials}>
+                {project.initials ?? project.title.slice(0, 2).toUpperCase()}
+              </span>
             </div>
           )}
         </div>

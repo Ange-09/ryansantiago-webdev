@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { PROJECTS } from "./ProjectData";
-import ProjectCard, { type Project } from "../ProjectCard/ProjectCard";
+import { type Project } from "../ProjectsSection/ProjectData";
 import ProjectModal from "../ProjectCard/ProjectModal/ProjectModal";
 import styles from "./ProjectsSection.module.css";
-
+import ProjectCard from "../ProjectCard/ProjectCard";
 export default function ProjectsSection() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 

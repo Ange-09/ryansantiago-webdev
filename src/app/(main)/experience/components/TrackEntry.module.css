@@ -1,0 +1,166 @@
+.entry {
+  display: flex;
+  gap: 0;
+  padding: 20px 0;
+  border-bottom: 0.5px solid #1a3050;
+  cursor: default;
+}
+
+.entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.entry:first-child {
+  padding-top: 0;
+}
+
+/* ── Margin column (track ID + dot) ── */
+.margin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 48px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.trackId {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  color: #3a5a7a;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a3050;
+  border: 0.5px solid #2a4a6a;
+  flex-shrink: 0;
+  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.dotActive {
+  background: #c8a84a;
+  border-color: #c8a84a;
+  box-shadow: 0 0 8px rgba(200, 168, 74, 0.35);
+}
+
+/* ── Body column ── */
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.company {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #d4e4f8;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.role {
+  font-size: 12px;
+  color: #5a7a9a;
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.period {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  color: #3a5a7a;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.type {
+  font-size: 9px;
+  color: #2a4a6a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Bullets ── */
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bullet {
+  font-size: 13px;
+  color: #6a8faa;
+  line-height: 1.65;
+  padding-left: 14px;
+  position: relative;
+}
+
+.bullet::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: #2a4a6a;
+  font-size: 11px;
+  top: 2px;
+}
+
+/* ── Featured track callout ── */
+.featuredTrack {
+  margin-top: 12px;
+  border-left: 1.5px solid rgba(200, 168, 74, 0.4);
+  border-radius: 0 4px 4px 0;
+  background: rgba(200, 168, 74, 0.04);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ftLabel {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200, 168, 74, 0.55);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.ftDescription {
+  font-size: 12px;
+  color: #5a7a9a;
+  line-height: 1.6;
+  margin: 0;
+}

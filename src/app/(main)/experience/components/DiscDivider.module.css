@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 4px 48px;
+}
+
+.line {
+  flex: 1;
+  height: 0.5px;
+  background: #1a3050;
+}
+
+.disc {
+  flex-shrink: 0;
+}

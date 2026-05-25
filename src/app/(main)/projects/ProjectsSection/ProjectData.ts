@@ -9,7 +9,7 @@ export interface Project {
   initials?: string;
   coverGradient?: string;
   isFeatured?: boolean;
-  webUrl?: string;
+  projImg?: string;
 }
 export const PROJECTS: Project[] = [
   {
@@ -23,7 +23,7 @@ export const PROJECTS: Project[] = [
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDy9l_R6KYQqIlVewJzw37sVos_vATHeucGIjzo1AFxFEf3m3L-lBkR69nQhiKOEPnaR1SXi3EzmViSLOWpr2HPSlEtcuv-mV9PJj6xb2FrTayYDls4Nzhc8c6AHem5pToWEiRMyrFFvsNsiTSqe4ADnmCeISTuF5NdEL1vDYlpixrho0QkyqGXYzbdJrSkYKWvt_ACGpJjMN3YB3QwnoaiwdHBqxpEZWsCkTHVT6wjgqCp86QRNUq-8c-Cl_h5a1je1r95s-lFM_nK",
     isFeatured: true,
-    webUrl: "https://fix-flow-efoyeasry-ange-09s-projects.vercel.app/login",
+    projImg: "https://fix-flow-efoyeasry-ange-09s-projects.vercel.app/login",
   },
   {
     id: "analog-sound",

@@ -291,7 +291,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   RIGHT — Live preview iframe
+   RIGHT — Project image preview
    ══════════════════════════════════════════════════════════════════════════════ */
 
 .preview {
@@ -302,21 +302,47 @@
   min-height: 300px;
 }
 
-.iframe {
+.previewImg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: none;
+  object-fit: cover;
   display: block;
 }
 
-.iframeFallback {
+.previewOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 40%,
+      rgba(200, 168, 74, 0.05) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(7, 16, 31, 0.1) 0%,
+      rgba(7, 16, 31, 0.5) 100%
+    );
+  pointer-events: none;
+}
+
+.previewFallback {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, #0d2040, #1a3a60);
+}
+
+.previewFallbackInitials {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(64px, 14vw, 120px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.1);
+  user-select: none;
 }
 
 .btnPrimaryDisabled {
@@ -332,31 +358,4 @@
   cursor: not-allowed;
   display: inline-flex;
   align-items: center;
-}
-
-.iframeFallbackImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: blur(2px) brightness(0.4);
-}
-
-.iframeFallbackOverlay {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.iframeFallbackText {
-  font-family: "SF Mono", "Fira Code", monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted, #5a7a9a);
 }
