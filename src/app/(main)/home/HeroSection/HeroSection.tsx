@@ -1,4 +1,5 @@
 import styles from "./HeroSection.module.css";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -21,12 +22,17 @@ export default function HeroSection() {
           </p>
 
           <div className={styles.ctaRow}>
-            <button className={styles.btnPrimary} type="button">
-              View Compositions
-            </button>
-            <button className={styles.btnGhost} type="button">
-              Read Background
-            </button>
+            <Link href="/compositions">
+              <button className={styles.btnPrimary} type="button">
+                View Compositions
+              </button>
+            </Link>
+
+            <Link href="/background">
+              <button className={styles.btnGhost} type="button">
+                Read Background
+              </button>
+            </Link>
           </div>
         </div>
       </div>
