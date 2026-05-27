@@ -22,7 +22,6 @@ export const PROJECTS: Project[] = [
     tech: ["Figma", "ProtoPie", "React"],
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDy9l_R6KYQqIlVewJzw37sVos_vATHeucGIjzo1AFxFEf3m3L-lBkR69nQhiKOEPnaR1SXi3EzmViSLOWpr2HPSlEtcuv-mV9PJj6xb2FrTayYDls4Nzhc8c6AHem5pToWEiRMyrFFvsNsiTSqe4ADnmCeISTuF5NdEL1vDYlpixrho0QkyqGXYzbdJrSkYKWvt_ACGpJjMN3YB3QwnoaiwdHBqxpEZWsCkTHVT6wjgqCp86QRNUq-8c-Cl_h5a1je1r95s-lFM_nK",
-    isFeatured: true,
     projImg: "https://fix-flow-efoyeasry-ange-09s-projects.vercel.app/login",
   },
   {
@@ -69,6 +68,7 @@ export const PROJECTS: Project[] = [
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuBR_Oeo6qnSMk6qnnC4ztCUP312VTxDUmumohuDu91VfBIPM7RlhzXgIuz5Iksc2ddbn5UMcwrj4bkjbyFCAV5o_3fxYobTpHPZfsYNxhf1h9U1k8n2IGGvIpX8gk0jEEq9nH9lvzSiMtVy5NVR3AI4ehCBwBIiawC1_P7Km-rubuPpBrdFvbfn_pAw2N0mnh-lWISmiZtxBvnKPwOgWB3OoH6nNZ7eoigB0hfDxr70-vVlqL64SQHekXfJG4Lot0mVckpFM7Or4lIT",
   },
+
   // Initials-fallback example (no imageUrl):
   {
     id: "flux-portal",
