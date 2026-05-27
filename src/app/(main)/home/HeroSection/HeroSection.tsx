@@ -22,10 +22,10 @@ export default function HeroSection() {
 
           <div className={styles.ctaRow}>
             <button className={styles.btnPrimary} type="button">
-              View Portfolio
+              View Compositions
             </button>
             <button className={styles.btnGhost} type="button">
-              Read Story
+              Read Background
             </button>
           </div>
         </div>
