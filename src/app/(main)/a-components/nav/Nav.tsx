@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Nav.module.css";
@@ -17,11 +17,39 @@ const NAV_LINKS: NavLink[] = [
   { label: "Contact", href: "/contact" },
 ];
 
+// How many px from the top of the viewport triggers the reveal on hover
+const HOVER_TRIGGER_HEIGHT = 80;
+
 export default function Nav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const isScrolledDown = useRef(false);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  // Hide on scroll down, show when back at top
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = window.scrollY > 10;
+      if (scrolled !== isScrolledDown.current) {
+        isScrolledDown.current = scrolled;
+        setVisible(!scrolled);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Reveal when mouse hovers near the top edge
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isScrolledDown.current) return;
+      setVisible(e.clientY <= HOVER_TRIGGER_HEIGHT);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => window.removeEventListener("mousemove", onMouseMove);
+  }, []);
 
   // Close on resize to desktop
   useEffect(() => {
@@ -42,7 +70,10 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={styles.nav} aria-label="Primary navigation">
+      <nav
+        className={`${styles.nav} ${visible ? styles.navVisible : styles.navHidden}`}
+        aria-label="Primary navigation"
+      >
         <div className={styles.inner}>
           {/* Logo */}
           <Link href="/" className={styles.logo} aria-label="RS — home">
@@ -78,6 +109,9 @@ export default function Nav() {
           </button>
         </div>
       </nav>
+
+      {/* Invisible hover sentinel strip — always present at the top of the viewport */}
+      <div className={styles.hoverSentinel} aria-hidden="true" />
 
       {/* Mobile drawer overlay */}
       <div
