@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import styles from './ExperienceSection.module.css';
+import { useState } from "react";
+import styles from "./ExperienceSection.module.css";
 import {
   professionalWork,
   educationEntries,
   organizationEntries,
   certifications,
-} from './experienceData';
+} from "./experienceData";
 import type {
   ExperienceEntry,
   EducationEntry,
   OrganizationEntry,
   Certification,
-} from './experienceData';
+} from "./experienceData";
 
 // ─────────────────────────────────────────────
 // DiscDivider
@@ -24,10 +24,31 @@ function DiscDivider() {
     <div className={styles.discDivider} aria-hidden="true">
       <div className={styles.discLine} />
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="13" fill="#0d1e33" stroke="#1a3050" strokeWidth="0.5" />
-        <circle cx="14" cy="14" r="9"  fill="none"   stroke="#1a3050" strokeWidth="0.5" />
-        <circle cx="14" cy="14" r="5"  fill="none"   stroke="#1a3050" strokeWidth="0.5" />
-        <circle cx="14" cy="14" r="4"  fill="rgba(200,168,74,0.18)" />
+        <circle
+          cx="14"
+          cy="14"
+          r="13"
+          fill="#0d1e33"
+          stroke="#1a3050"
+          strokeWidth="0.5"
+        />
+        <circle
+          cx="14"
+          cy="14"
+          r="9"
+          fill="none"
+          stroke="#1a3050"
+          strokeWidth="0.5"
+        />
+        <circle
+          cx="14"
+          cy="14"
+          r="5"
+          fill="none"
+          stroke="#1a3050"
+          strokeWidth="0.5"
+        />
+        <circle cx="14" cy="14" r="4" fill="rgba(200,168,74,0.18)" />
         <circle cx="14" cy="14" r="1.5" fill="#07101f" />
       </svg>
       <div className={styles.discLine} />
@@ -44,14 +65,14 @@ function TrackEntry({ entry }: { entry: ExperienceEntry }) {
 
   return (
     <article
-      className={`${styles.trackEntry} ${hovered ? styles.trackEntryHovered : ''}`}
+      className={`${styles.trackEntry} ${hovered ? styles.trackEntryHovered : ""}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {/* Margin: track ID + groove dot */}
       <div className={styles.trackMargin}>
-        <span className={styles.trackId}>{entry.trackId}</span>
-        <span className={`${styles.grooveDot} ${hovered ? styles.grooveDotActive : ''}`} aria-hidden="true" />
+        <span className={styles.srOnly}>{entry.trackId}</span>
+        <span className={`${styles.grooveDot} ...`} />
       </div>
 
       {/* Body */}
@@ -59,10 +80,10 @@ function TrackEntry({ entry }: { entry: ExperienceEntry }) {
         {/* Header row */}
         <div className={styles.entryHeader}>
           <div className={styles.entryHeaderLeft}>
-            <h3 className={styles.companyName}>{entry.company}</h3>
             {entry.roleLabel && (
-              <p className={styles.roleLabel}>{entry.roleLabel}</p>
+              <h3 className={styles.roleTitle}>{entry.roleLabel}</h3>
             )}
+            <p className={styles.companyName}>{entry.company}</p>
           </div>
           <div className={styles.entryHeaderRight}>
             <span className={styles.period}>{entry.period}</span>
@@ -78,7 +99,9 @@ function TrackEntry({ entry }: { entry: ExperienceEntry }) {
                 <p className={styles.subsectionTitle}>{sub.roleTitle}</p>
                 <ul className={styles.bulletList}>
                   {sub.bullets.map((b, i) => (
-                    <li key={i} className={styles.bulletItem}>{b}</li>
+                    <li key={i} className={styles.bulletItem}>
+                      {b}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -90,17 +113,11 @@ function TrackEntry({ entry }: { entry: ExperienceEntry }) {
         {entry.bullets && entry.bullets.length > 0 && (
           <ul className={styles.bulletList}>
             {entry.bullets.map((b, i) => (
-              <li key={i} className={styles.bulletItem}>{b}</li>
+              <li key={i} className={styles.bulletItem}>
+                {b}
+              </li>
             ))}
           </ul>
-        )}
-
-        {/* Featured project callout */}
-        {entry.featuredProject && (
-          <div className={styles.featuredTrack}>
-            <span className={styles.featuredLabel}>{entry.featuredProject.label}</span>
-            <p className={styles.featuredDesc}>{entry.featuredProject.description}</p>
-          </div>
         )}
       </div>
     </article>
@@ -116,13 +133,13 @@ function EducationTrack({ entry }: { entry: EducationEntry }) {
 
   return (
     <article
-      className={`${styles.trackEntry} ${hovered ? styles.trackEntryHovered : ''}`}
+      className={`${styles.trackEntry} ${hovered ? styles.trackEntryHovered : ""}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div className={styles.trackMargin}>
-        <span className={styles.trackId}>{entry.trackId}</span>
-        <span className={`${styles.grooveDot} ${hovered ? styles.grooveDotActive : ''}`} aria-hidden="true" />
+        <span className={styles.srOnly}>{entry.trackId}</span>
+        <span className={`${styles.grooveDot} ...`} />
       </div>
 
       <div className={styles.trackBody}>
@@ -130,7 +147,9 @@ function EducationTrack({ entry }: { entry: EducationEntry }) {
           <div className={styles.entryHeaderLeft}>
             <h3 className={styles.companyName}>{entry.institution}</h3>
             {entry.degrees.map((deg) => (
-              <p key={deg} className={styles.roleLabel}>{deg}</p>
+              <p key={deg} className={styles.roleLabel}>
+                {deg}
+              </p>
             ))}
           </div>
           <span className={styles.period}>{entry.period}</span>
@@ -149,13 +168,13 @@ function OrganizationTrack({ entry }: { entry: OrganizationEntry }) {
 
   return (
     <article
-      className={`${styles.trackEntry} ${hovered ? styles.trackEntryHovered : ''}`}
+      className={`${styles.trackEntry} ${hovered ? styles.trackEntryHovered : ""}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div className={styles.trackMargin}>
-        <span className={styles.trackId}>{entry.trackId}</span>
-        <span className={`${styles.grooveDot} ${hovered ? styles.grooveDotActive : ''}`} aria-hidden="true" />
+        <span className={styles.srOnly}>{entry.trackId}</span>
+        <span className={`${styles.grooveDot} ...`} />
       </div>
 
       <div className={styles.trackBody}>
@@ -169,7 +188,9 @@ function OrganizationTrack({ entry }: { entry: OrganizationEntry }) {
 
         <ul className={styles.bulletList}>
           {entry.bullets.map((b, i) => (
-            <li key={i} className={styles.bulletItem}>{b}</li>
+            <li key={i} className={styles.bulletItem}>
+              {b}
+            </li>
           ))}
         </ul>
       </div>
@@ -225,7 +246,6 @@ export default function ExperienceSection() {
         <h2 className={styles.sectionHeading}>The Liner Notes</h2>
 
         <div className={styles.gatefold}>
-
           {/* ── Professional Work ── */}
           <BlockHeader title="Professional Work" />
           <div className={styles.grooveWrap}>
@@ -259,7 +279,6 @@ export default function ExperienceSection() {
 
           {/* ── Certifications ── */}
           <CreditsBlock certs={certifications} />
-
         </div>
       </div>
     </section>

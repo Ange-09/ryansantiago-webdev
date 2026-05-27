@@ -8,7 +8,6 @@
    → Responsive
 ═══════════════════════════════════════════════ */
 
-
 /* ─────────────────────────────────────────────
    Section shell & atmosphere
 ───────────────────────────────────────────── */
@@ -51,14 +50,13 @@
 }
 
 .sectionHeading {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: "Playfair Display", Georgia, serif;
   font-size: 32px;
   font-weight: 700;
   color: #d4e4f8;
   margin: 0 0 36px;
   line-height: 1.2;
 }
-
 
 /* ─────────────────────────────────────────────
    Gatefold surface
@@ -74,7 +72,6 @@
   gap: 0;
 }
 
-
 /* ─────────────────────────────────────────────
    Block header  ("Professional Work", "Education" …)
 ───────────────────────────────────────────── */
@@ -87,7 +84,7 @@
 }
 
 .blockHeaderTitle {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: "Playfair Display", Georgia, serif;
   font-size: 13px;
   font-weight: 400;
   color: #a8c0d8;
@@ -107,7 +104,6 @@
 .blockHeaderRule:first-child {
   background: linear-gradient(270deg, #1a3050, transparent);
 }
-
 
 /* ─────────────────────────────────────────────
    Groove wrap — contains the vertical groove line
@@ -135,6 +131,17 @@
   pointer-events: none;
 }
 
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ─────────────────────────────────────────────
    Track entry (shared shell for all entry types)
@@ -143,11 +150,12 @@
 .trackEntry {
   display: flex;
   gap: 0;
-  padding: 20px 0;
+  padding: 20px 3% 20px 0;
   border-bottom: 0.5px solid #0e1e30;
   border-radius: 6px;
   transition: background 0.2s ease;
   cursor: default;
+  text-align: justify;
 }
 
 .trackEntry:last-child {
@@ -169,6 +177,10 @@
    but since we keep state per-entry, we use opacity on body
    text to achieve the "focus" effect without JS on the parent. */
 .trackEntryHovered .companyName {
+  color: #7a9ab8;
+}
+
+.trackEntryHovered .roleTitle {
   color: #eef4ff;
 }
 
@@ -193,7 +205,6 @@
   background: rgba(200, 168, 74, 0.07);
 }
 
-
 /* ─────────────────────────────────────────────
    Track margin column (ID + dot)
 ───────────────────────────────────────────── */
@@ -202,14 +213,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  justify-content: flex-start;
+  padding-top: 6px;
+  gap: 0;
   width: 52px;
   flex-shrink: 0;
-  padding-top: 3px;
 }
 
 .trackId {
-  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-family: "SF Mono", "Fira Code", monospace;
   font-size: 10px;
   color: #3a5a7a;
   letter-spacing: 0.08em;
@@ -223,7 +235,10 @@
   background: #1a3050;
   border: 0.5px solid #2a4a6a;
   flex-shrink: 0;
-  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .grooveDotActive {
@@ -231,7 +246,6 @@
   border-color: #c8a84a;
   box-shadow: 0 0 8px rgba(200, 168, 74, 0.4);
 }
-
 
 /* ─────────────────────────────────────────────
    Track body
@@ -265,7 +279,18 @@
 }
 
 .companyName {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 12px;
+  color: #5a7a9a; /* was #d4e4f8 */
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+  font-family: inherit; /* no serif — plain sans */
+  font-weight: 400;
+}
+
+.roleTitle {
+  font-family: "Playfair Display", Georgia, serif;
   font-size: 16px;
   font-weight: 700;
   color: #d4e4f8;
@@ -284,7 +309,7 @@
 }
 
 .period {
-  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-family: "SF Mono", "Fira Code", monospace;
   font-size: 10px;
   color: #3a5a7a;
   letter-spacing: 0.04em;
@@ -299,7 +324,6 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-
 
 /* ─────────────────────────────────────────────
    Subsections (multi-role within one position)
@@ -331,14 +355,13 @@
 
 /* Thin rule under subsection title */
 .subsectionTitle::after {
-  content: '';
+  content: "";
   display: block;
   width: 28px;
   height: 0.5px;
   background: #1a3050;
   margin-top: 4px;
 }
-
 
 /* ─────────────────────────────────────────────
    Bullet lists (shared)
@@ -366,7 +389,6 @@
   font-size: 10px;
 }
 
-
 /* ─────────────────────────────────────────────
    Featured track callout
 ───────────────────────────────────────────── */
@@ -380,7 +402,9 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  transition: border-left-color 0.2s ease, background 0.2s ease;
+  transition:
+    border-left-color 0.2s ease,
+    background 0.2s ease;
 }
 
 .featuredLabel {
@@ -396,7 +420,6 @@
   line-height: 1.6;
   margin: 0;
 }
-
 
 /* ─────────────────────────────────────────────
    Credits block (certifications)
@@ -445,7 +468,6 @@
   letter-spacing: 0.04em;
 }
 
-
 /* ─────────────────────────────────────────────
    Disc divider
 ───────────────────────────────────────────── */
@@ -466,7 +488,6 @@
 .discDivider svg {
   flex-shrink: 0;
 }
-
 
 /* ─────────────────────────────────────────────
    Responsive
