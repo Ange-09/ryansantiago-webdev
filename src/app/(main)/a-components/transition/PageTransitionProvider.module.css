@@ -1,35 +1,3 @@
-/**
- * PageTransitionProvider.module.css
- *
- * Desktop (≥ 640px): left-spine book-page flip
- *   - transform-origin: left center
- *   - rotateY for the in/out rotation
- *   - Gives the illusion of turning a right-hand page in a book
- *
- * Mobile (< 640px): top-edge vertical card flip
- *   - transform-origin: top center
- *   - rotateX for the in/out rotation
- *   - Horizontal perspective rotation looks awkward on narrow screens because
- *     the vanishing point exits the viewport; a vertical flip keeps the motion
- *     fully within the visible area and reads more naturally on touch devices.
- *
- * Both share the same phase class names (flipOut / flipIn) — only the
- * transform axis and origin differ via the media query.
- *
- * Easing: cubic-bezier(0.645, 0.045, 0.355, 1.000)
- *   A symmetrical ease-in-out that mimics the natural acceleration of paper
- *   (starts slow as you overcome inertia, accelerates through the arc,
- *   decelerates as it settles flat). Known as "easeInOutCubic".
- *
- * backface-visibility: hidden prevents the reversed face of the page
- *   from showing through during mid-rotation — without it you'd see a
- *   mirror of the content as the page passes edge-on.
- *
- * prefers-reduced-motion: the animation is disabled entirely for users who
- *   have requested reduced motion. The route still changes; only the
- *   transform is skipped.
- */
-
 /* ── Perspective container ──────────────────────────────────────────────── */
 
 .perspectiveContainer {
@@ -78,7 +46,7 @@
 
   /* Shared transition timing applied when classes are added */
   transition-property: transform, opacity;
-  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-duration: 280ms;
 }
 
@@ -111,8 +79,7 @@
    * CSS transition alone (transitions go from current value to target).
    * So we use an animation instead which defines the full keyframe range.
    */
-  animation: flipInDesktop 280ms cubic-bezier(0.645, 0.045, 0.355, 1.000)
-    forwards;
+  animation: flipInDesktop 280ms cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
 }
 
 @keyframes flipInDesktop {
@@ -148,8 +115,7 @@
     transform-origin: top center;
     transform: rotateX(0deg);
     opacity: 1;
-    animation: flipInMobile 280ms cubic-bezier(0.645, 0.045, 0.355, 1.000)
-      forwards;
+    animation: flipInMobile 280ms cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
   }
 
   @keyframes flipInMobile {

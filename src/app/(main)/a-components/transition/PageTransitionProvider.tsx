@@ -55,7 +55,7 @@ export function usePageTransition(): TransitionContextValue {
 // ─── Durations ────────────────────────────────────────────────────────────────
 
 /** Each half of the flip (out + in) in milliseconds. */
-const HALF_DURATION_MS = 280;
+const HALF_DURATION_MS = 400;
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
@@ -102,7 +102,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
 
       return () => window.clearTimeout(midTimer);
     },
-    [router]
+    [router],
   );
 
   // ── Handle browser back/forward (not triggered by navigate()) ─────────────
@@ -138,13 +138,6 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
 
   return (
     <TransitionContext.Provider value={{ navigate }}>
-      {/*
-       * Two-element structure is required:
-       * - perspectiveContainer sets CSS perspective (must be on the PARENT,
-       *   not the element being transformed — applying both to the same
-       *   element cancels the 3-D effect in CSS).
-       * - flipWrapper is the element that actually rotates.
-       */}
       <div className={styles.perspectiveContainer}>
         <div className={wrapperClass}>{children}</div>
       </div>
