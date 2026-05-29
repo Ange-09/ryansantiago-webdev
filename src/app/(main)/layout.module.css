@@ -1,0 +1,24 @@
+/**
+ * app/(main)/layout.module.css
+ *
+ * Minimal styles for the main layout wrapper.
+ * The layout div exists only to carry the Playfair font CSS variable —
+ * it should never clip, constrain, or reposition its children.
+ */
+
+.mainLayout {
+  /*
+   * Stretch to fill the full viewport so the flip animation has a complete
+   * canvas to rotate. min-height rather than height so the page can still
+   * scroll for long content.
+   */
+  min-height: 100vh;
+  width: 100%;
+
+  /*
+   * Overflow-x hidden prevents the brief horizontal scroll that can appear
+   * on desktop at the exact moment the page is rotating past the viewport
+   * edge during the flip-out phase.
+   */
+  overflow-x: hidden;
+}

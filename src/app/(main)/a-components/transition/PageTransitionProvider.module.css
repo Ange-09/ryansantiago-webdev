@@ -1,0 +1,197 @@
+/**
+ * PageTransitionProvider.module.css
+ *
+ * Desktop (≥ 640px): left-spine book-page flip
+ *   - transform-origin: left center
+ *   - rotateY for the in/out rotation
+ *   - Gives the illusion of turning a right-hand page in a book
+ *
+ * Mobile (< 640px): top-edge vertical card flip
+ *   - transform-origin: top center
+ *   - rotateX for the in/out rotation
+ *   - Horizontal perspective rotation looks awkward on narrow screens because
+ *     the vanishing point exits the viewport; a vertical flip keeps the motion
+ *     fully within the visible area and reads more naturally on touch devices.
+ *
+ * Both share the same phase class names (flipOut / flipIn) — only the
+ * transform axis and origin differ via the media query.
+ *
+ * Easing: cubic-bezier(0.645, 0.045, 0.355, 1.000)
+ *   A symmetrical ease-in-out that mimics the natural acceleration of paper
+ *   (starts slow as you overcome inertia, accelerates through the arc,
+ *   decelerates as it settles flat). Known as "easeInOutCubic".
+ *
+ * backface-visibility: hidden prevents the reversed face of the page
+ *   from showing through during mid-rotation — without it you'd see a
+ *   mirror of the content as the page passes edge-on.
+ *
+ * prefers-reduced-motion: the animation is disabled entirely for users who
+ *   have requested reduced motion. The route still changes; only the
+ *   transform is skipped.
+ */
+
+/* ── Perspective container ──────────────────────────────────────────────── */
+
+.perspectiveContainer {
+  /*
+   * perspective must live on the parent of the rotating element.
+   * 1400px gives a natural depth for a full-width page on desktop.
+   * Lower values = more exaggerated 3-D fish-eye; higher = flatter.
+   */
+  perspective: 1400px;
+  perspective-origin: center center;
+
+  /*
+   * Fill the available layout area. The container itself never transforms —
+   * only its child (.flipWrapper) rotates.
+   */
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ── The rotating wrapper ───────────────────────────────────────────────── */
+
+.flipWrapper {
+  width: 100%;
+  min-height: 100%;
+
+  /*
+   * transform-style: preserve-3d ensures child elements participate in the
+   * 3-D scene rather than being projected onto a flat plane first.
+   */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  /*
+   * Will-change hints to the browser that this element is about to animate,
+   * triggering GPU compositing. Use sparingly — only on elements that
+   * genuinely animate. Remove after animation with phase "idle" having no
+   * will-change (the class is absent in idle, so this only applies during
+   * flip-out / flip-in).
+   */
+  will-change: transform;
+
+  /* Default (idle) state: fully visible, no transform */
+  transform: rotateY(0deg);
+  opacity: 1;
+
+  /* Shared transition timing applied when classes are added */
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  transition-duration: 280ms;
+}
+
+/* ── Desktop: left-spine horizontal flip (default) ──────────────────────── */
+
+/*
+ * The page pivots on its left edge — exactly like turning the right-hand
+ * page of an open book toward the viewer.
+ *
+ * flip-out: rotates from 0° to −90° (right edge swings away from viewer)
+ * flip-in:  starts at 90° (left edge facing viewer), rotates to 0°
+ *
+ * We also nudge opacity to 0 at 90° so any sub-pixel rendering at the
+ * exact edge-on moment doesn't produce a visible sliver.
+ */
+
+.flipWrapper.flipOut {
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  opacity: 0;
+}
+
+.flipWrapper.flipIn {
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  opacity: 1;
+
+  /*
+   * The flip-in starts from 90° — we can't animate FROM 90° using a
+   * CSS transition alone (transitions go from current value to target).
+   * So we use an animation instead which defines the full keyframe range.
+   */
+  animation: flipInDesktop 280ms cubic-bezier(0.645, 0.045, 0.355, 1.000)
+    forwards;
+}
+
+@keyframes flipInDesktop {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* ── Mobile: top-edge vertical flip (< 640px) ────────────────────────────── */
+
+@media (max-width: 639px) {
+  .perspectiveContainer {
+    /*
+     * Slightly tighter perspective on mobile — the viewport is narrow so
+     * the 3-D depth needs to feel proportional. 900px still reads as
+     * clearly 3-D without distorting content near the edges.
+     */
+    perspective: 900px;
+  }
+
+  .flipWrapper.flipOut {
+    transform-origin: top center;
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+
+  .flipWrapper.flipIn {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    opacity: 1;
+    animation: flipInMobile 280ms cubic-bezier(0.645, 0.045, 0.355, 1.000)
+      forwards;
+  }
+
+  @keyframes flipInMobile {
+    from {
+      transform: rotateX(-90deg);
+      opacity: 0;
+    }
+    to {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+  }
+}
+
+/* ── Reduced motion: skip all transforms, use a simple fade ─────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .flipWrapper {
+    transition-property: opacity;
+    transition-duration: 160ms;
+    transition-timing-function: ease;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .flipWrapper.flipOut {
+    opacity: 0;
+    transform: none !important;
+  }
+
+  .flipWrapper.flipIn {
+    opacity: 1;
+    transform: none !important;
+    animation: fadeIn 160ms ease forwards !important;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

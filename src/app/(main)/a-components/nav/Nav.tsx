@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { usePageTransition } from "@/app/(main)/a-components/transition/PageTransitionProvider";
 import styles from "./Nav.module.css";
 
 interface NavLink {
@@ -17,16 +18,27 @@ const NAV_LINKS: NavLink[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-// How many px from the top of the viewport triggers the reveal on hover
 const HOVER_TRIGGER_HEIGHT = 80;
 
 export default function Nav() {
   const pathname = usePathname();
+  const { navigate } = usePageTransition();
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const isScrolledDown = useRef(false);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  function handleNavClick(
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) {
+    e.preventDefault();
+    if (pathname === href) return;
+    // Close the mobile drawer before animating
+    closeMenu();
+    navigate(href);
+  }
 
   // Hide on scroll down, show when back at top
   useEffect(() => {
@@ -75,7 +87,7 @@ export default function Nav() {
         aria-label="Primary navigation"
       >
         <div className={styles.inner}>
-          {/* Logo */}
+          {/* Logo — uses Link since it goes home and doesn't need the flip */}
           <Link href="/" className={styles.logo} aria-label="RS — home">
             <span className={styles.rs}>RS</span>
           </Link>
@@ -86,13 +98,14 @@ export default function Nav() {
               const isActive = pathname === href;
               return (
                 <li key={href}>
-                  <Link
+                  <a
                     href={href}
+                    onClick={(e) => handleNavClick(e, href)}
                     className={isActive ? styles.linkActive : styles.link}
                     aria-current={isActive ? "page" : undefined}
                   >
                     {label}
-                  </Link>
+                  </a>
                 </li>
               );
             })}
@@ -110,7 +123,7 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Invisible hover sentinel strip — always present at the top of the viewport */}
+      {/* Invisible hover sentinel strip */}
       <div className={styles.hoverSentinel} aria-hidden="true" />
 
       {/* Mobile drawer overlay */}
@@ -136,16 +149,16 @@ export default function Nav() {
                 className={styles.drawerItem}
                 style={{ "--i": i } as React.CSSProperties}
               >
-                <Link
+                <a
                   href={href}
+                  onClick={(e) => handleNavClick(e, href)}
                   className={
                     isActive ? styles.drawerLinkActive : styles.drawerLink
                   }
-                  onClick={closeMenu}
                   aria-current={isActive ? "page" : undefined}
                 >
                   {label}
-                </Link>
+                </a>
               </li>
             );
           })}
