@@ -145,7 +145,7 @@ function EducationTrack({ entry }: { entry: EducationEntry }) {
       <div className={styles.trackBody}>
         <div className={styles.entryHeader}>
           <div className={styles.entryHeaderLeft}>
-            <h3 className={styles.companyName}>{entry.institution}</h3>
+            <h3 className={styles.roleTitle}>{entry.institution}</h3>
             {entry.degrees.map((deg) => (
               <p key={deg} className={styles.roleLabel}>
                 {deg}
@@ -180,7 +180,7 @@ function OrganizationTrack({ entry }: { entry: OrganizationEntry }) {
       <div className={styles.trackBody}>
         <div className={styles.entryHeader}>
           <div className={styles.entryHeaderLeft}>
-            <h3 className={styles.companyName}>{entry.title}</h3>
+            <h3 className={styles.roleTitle}>{entry.title}</h3>
             <p className={styles.roleLabel}>{entry.org}</p>
           </div>
           <span className={styles.period}>{entry.period}</span>

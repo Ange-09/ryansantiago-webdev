@@ -7,9 +7,9 @@ interface SocialLink {
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
-  { label: "Instagram", href: "https://www.google.com.ph/index.html" },
+  { label: "Facebook", href: "https://www.google.com.ph/index.html" },
   { label: "LinkedIn", href: "#" },
-  { label: "GitHub", href: "#" },
+  { label: "Email", href: "/contact" },
 ];
 
 export default function Footer() {
