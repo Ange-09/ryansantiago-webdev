@@ -18,11 +18,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className={`${styles.mainLayout} ${playfair.variable}`}>
-        <PageTransitionProvider>
-          <Nav />
-          {children}
-          <Footer />
-        </PageTransitionProvider>
+        <Nav />
+        <PageTransitionProvider>{children}</PageTransitionProvider>
+        <Footer />
       </div>
     </>
   );

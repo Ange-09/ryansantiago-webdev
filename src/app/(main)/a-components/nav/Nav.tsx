@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { usePageTransition } from "@/app/(main)/a-components/transition/PageTransitionProvider";
 import styles from "./Nav.module.css";
 
@@ -22,7 +22,15 @@ const HOVER_TRIGGER_HEIGHT = 80;
 
 export default function Nav() {
   const pathname = usePathname();
-  const { navigate } = usePageTransition();
+  const router = useRouter();
+
+  /**
+   * isProvided is true when Nav is rendered inside a PageTransitionProvider.
+   * When Nav is outside the provider (as in the current layout), isProvided
+   * is false and we fall back to plain router.push() so links still work.
+   */
+  const { navigate, isProvided } = usePageTransition();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const isScrolledDown = useRef(false);
@@ -35,9 +43,12 @@ export default function Nav() {
   ) {
     e.preventDefault();
     if (pathname === href) return;
-    // Close the mobile drawer before animating
     closeMenu();
-    navigate(href);
+    if (isProvided) {
+      navigate(href);
+    } else {
+      router.push(href);
+    }
   }
 
   // Hide on scroll down, show when back at top
@@ -87,12 +98,10 @@ export default function Nav() {
         aria-label="Primary navigation"
       >
         <div className={styles.inner}>
-          {/* Logo — uses Link since it goes home and doesn't need the flip */}
           <Link href="/" className={styles.logo} aria-label="RS — home">
             <span className={styles.rs}>RS</span>
           </Link>
 
-          {/* Desktop navigation links */}
           <ul className={styles.links} role="list">
             {NAV_LINKS.map(({ label, href }) => {
               const isActive = pathname === href;
@@ -111,7 +120,6 @@ export default function Nav() {
             })}
           </ul>
 
-          {/* Piano menu button — mobile only */}
           <button
             className={styles.pianoButton}
             onClick={() => setMenuOpen((v) => !v)}
@@ -123,17 +131,14 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Invisible hover sentinel strip */}
       <div className={styles.hoverSentinel} aria-hidden="true" />
 
-      {/* Mobile drawer overlay */}
       <div
         className={`${styles.overlay} ${menuOpen ? styles.overlayVisible : ""}`}
         onClick={closeMenu}
         aria-hidden="true"
       />
 
-      {/* Mobile drawer */}
       <div
         className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ""}`}
         role="dialog"

@@ -1,23 +1,5 @@
 "use client";
 
-/**
- * PageTransitionProvider
- *
- * Wraps the (main) layout and orchestrates a page-flip animation between
- * route changes. Exposes a `navigate(href)` helper via context so any
- * component can trigger the transition instead of calling router.push directly.
- *
- * Animation phases:
- *   idle     → page fully visible, no transform
- *   flip-out → page rotates 0° → −90° (folds away from viewer)
- *              desktop: rotates on left spine (book page turn)
- *              mobile:  rotates on top edge (vertical card flip — less
- *                       disorienting on narrow viewports)
- *   [swap]   → at the exact midpoint the route is pushed and content swapped
- *   flip-in  → page rotates 90° → 0° (unfolds into view)
- *   idle     → complete
- */
-
 import {
   createContext,
   useCallback,
@@ -32,30 +14,34 @@ import styles from "./PageTransitionProvider.module.css";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type FlipPhase = "idle" | "flip-out" | "flip-in";
+type FadePhase = "idle" | "fade-out" | "fade-in";
 
 interface TransitionContextValue {
-  /**
-   * Call this instead of router.push() to trigger the flip animation.
-   * Safe to call while already animating — duplicate calls are ignored.
-   */
   navigate: (href: string) => void;
+  /** True when the provider is actually mounted — false when using the default context */
+  isProvided: boolean;
 }
 
 // ─── Context ──────────────────────────────────────────────────────────────────
 
+/**
+ * The default value is intentionally a no-op navigate.
+ * Components outside the provider (e.g. Nav, Footer) detect `isProvided: false`
+ * and fall back to plain router.push() instead.
+ */
 const TransitionContext = createContext<TransitionContextValue>({
   navigate: () => {},
+  isProvided: false,
 });
 
 export function usePageTransition(): TransitionContextValue {
   return useContext(TransitionContext);
 }
 
-// ─── Durations ────────────────────────────────────────────────────────────────
+// ─── Duration ─────────────────────────────────────────────────────────────────
 
-/** Each half of the flip (out + in) in milliseconds. */
-const HALF_DURATION_MS = 400;
+const FADE_OUT_MS = 200;
+const FADE_IN_MS = 320;
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
@@ -63,14 +49,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [phase, setPhase] = useState<FlipPhase>("idle");
-
-  /**
-   * We keep a stable snapshot of children to display. During the flip-out we
-   * show the OLD children; at the midpoint we let React re-render with the new
-   * pathname's children naturally — the swap happens while the page is
-   * edge-on (invisible), so there's no visible flash.
-   */
+  const [phase, setPhase] = useState<FadePhase>("idle");
   const isAnimating = useRef(false);
   const prevPathname = useRef(pathname);
 
@@ -81,66 +60,56 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
       if (isAnimating.current) return;
       isAnimating.current = true;
 
-      // Phase 1: flip out
-      setPhase("flip-out");
+      setPhase("fade-out");
 
       const midTimer = window.setTimeout(() => {
-        // Midpoint: page is edge-on — push the route now.
-        // Next.js will update the URL and begin rendering the new page.
         router.push(href);
-
-        // Phase 2: flip in (new content renders behind this animation)
-        setPhase("flip-in");
+        setPhase("fade-in");
 
         const endTimer = window.setTimeout(() => {
           setPhase("idle");
           isAnimating.current = false;
-        }, HALF_DURATION_MS);
+        }, FADE_IN_MS);
 
         return () => window.clearTimeout(endTimer);
-      }, HALF_DURATION_MS);
+      }, FADE_OUT_MS);
 
       return () => window.clearTimeout(midTimer);
     },
     [router],
   );
 
-  // ── Handle browser back/forward (not triggered by navigate()) ─────────────
+  // ── Handle browser back/forward ────────────────────────────────────────────
 
   useEffect(() => {
     if (pathname === prevPathname.current) return;
     prevPathname.current = pathname;
-
-    // If our own navigate() is running it already owns the animation.
     if (isAnimating.current) return;
 
-    // External navigation (back/forward/Link): run a brief flip-in only.
     isAnimating.current = true;
-    setPhase("flip-in");
+    setPhase("fade-in");
 
     const t = window.setTimeout(() => {
       setPhase("idle");
       isAnimating.current = false;
-    }, HALF_DURATION_MS);
+    }, FADE_IN_MS);
 
     return () => window.clearTimeout(t);
   }, [pathname]);
 
-  // ── Derive wrapper class ───────────────────────────────────────────────────
+  // ── Class derivation ───────────────────────────────────────────────────────
 
   const wrapperClass = [
-    styles.flipWrapper,
-    phase === "flip-out" ? styles.flipOut : undefined,
-    phase === "flip-in" ? styles.flipIn : undefined,
+    styles.pageWrapper,
+    phase === "fade-out" ? styles.fadeOut : undefined,
+    phase === "fade-in" ? styles.fadeIn : undefined,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <TransitionContext.Provider value={{ navigate }}>
-      <div className={styles.perspectiveContainer}>
-        <div className={wrapperClass}>{children}</div>
-      </div>
+    <TransitionContext.Provider value={{ navigate, isProvided: true }}>
+      <div className={wrapperClass}>{children}</div>
     </TransitionContext.Provider>
   );
 }
