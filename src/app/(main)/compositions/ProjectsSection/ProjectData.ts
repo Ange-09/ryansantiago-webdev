@@ -22,6 +22,7 @@ export const PROJECTS: Project[] = [
     tech: ["Figma", "ProtoPie", "React"],
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDy9l_R6KYQqIlVewJzw37sVos_vATHeucGIjzo1AFxFEf3m3L-lBkR69nQhiKOEPnaR1SXi3EzmViSLOWpr2HPSlEtcuv-mV9PJj6xb2FrTayYDls4Nzhc8c6AHem5pToWEiRMyrFFvsNsiTSqe4ADnmCeISTuF5NdEL1vDYlpixrho0QkyqGXYzbdJrSkYKWvt_ACGpJjMN3YB3QwnoaiwdHBqxpEZWsCkTHVT6wjgqCp86QRNUq-8c-Cl_h5a1je1r95s-lFM_nK",
+    isFeatured: true,
     projImg: "https://fix-flow-efoyeasry-ange-09s-projects.vercel.app/login",
   },
   {
@@ -34,6 +35,7 @@ export const PROJECTS: Project[] = [
     tech: ["Next.js", "WebGL", "Sanity"],
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCq58hhoOIW70AEo90zPjJ3P6j0xfqbxNbXI25RNfnRpCshVSnryh9d9eZbk4U9E1gTn46mzvvDy4LGFXBM_NQ3TRE70Rn2IvAfZwjndd6lisL2tBFIysbc27hL8Y3JmsaDmcItOAWjZ6MTgjuUsI45dmMGny5HwN3qO4XSuB4l_m6S0F0gHtmPr3TlRdJMjRZl9a30wulRP5omfvE49WwM_rl3Swz09g2RECuitBC8DeTx5GSG8N3A2QP4oMnsE_CewowhE0BEPtSp",
+    isFeatured: true,
   },
   {
     id: "brutal-form",
@@ -45,6 +47,7 @@ export const PROJECTS: Project[] = [
     tech: ["Nuxt", "GSAP", "Contentful"],
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAtkepMNQZdTSGa5DMWoyrS-osOq97IRDkLpt1UOuu3IXI1yN5JET66RcdNh-Ue5W6Qo6j76sttviXvvYKH9-J9JiR5ss5yxFkKgaokKRW7cYPNXhTCBxErNrhOzjYsCkQbKFNdFaC_DszGwLGlAv81di7QxIKKzmLdT5fCd_D9Im4mXdQ8FEmkm_KHdg_STXC_bEZ3J8T6ftJpitIi8xiauXo_iYxVIi0ghdAlaJHXPnerMZ9vVjcRL1kSka76Z8jH0KWhOMLrNzCB",
+    isFeatured: true,
   },
   {
     id: "prism",
