@@ -1,0 +1,13 @@
+.main {
+  background-color: var(--color-bg-base);
+  min-height: 100vh;
+}
+
+.section {
+  position: relative;
+  border-bottom: 0.5px solid var(--color-border);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
