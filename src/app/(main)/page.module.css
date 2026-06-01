@@ -1,13 +1,24 @@
 .main {
-  background-color: var(--color-bg-base);
-  min-height: 100vh;
+  position: relative;
 }
 
 .section {
   position: relative;
-  border-bottom: 0.5px solid var(--color-border);
+  z-index: 1;
 }
 
-.section:last-child {
-  border-bottom: none;
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c8a84abc, transparent);
+  pointer-events: none;
+}
+
+.section:last-child::after {
+  display: none;
 }

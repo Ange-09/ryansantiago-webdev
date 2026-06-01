@@ -41,7 +41,7 @@ export default function ContactSection() {
       <div className={styles.inner}>
         {/* Left — context */}
         <div className={styles.context}>
-          <span className={styles.sectionTag}>04 — Contact</span>
+          <span className={styles.sectionTag}>Contact</span>
           <h2 className={styles.heading}>Start a&nbsp;Dialogue.</h2>
           <p className={styles.subtext}>
             Partnering with visionary teams to craft digital experiences that
@@ -61,7 +61,7 @@ export default function ContactSection() {
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>Location</span>
               <span className={styles.detailValue}>
-                Midnight Hours District,&nbsp;Global.
+                Parañaque City, Metro Manila
               </span>
             </div>
           </div>

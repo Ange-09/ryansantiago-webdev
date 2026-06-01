@@ -242,7 +242,7 @@ export default function ExperienceSection() {
       <div className={styles.spotlight} aria-hidden="true" />
 
       <div className={styles.inner}>
-        <p className={styles.sectionTag}>05 — Experience</p>
+        <p className={styles.sectionTag}>Experience</p>
         <h2 className={styles.sectionHeading}>The Liner Notes</h2>
 
         <div className={styles.gatefold}>
