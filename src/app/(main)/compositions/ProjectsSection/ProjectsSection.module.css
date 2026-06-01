@@ -11,13 +11,22 @@
 }
 
 .sectionTag {
-  display: block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: inline-block;
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
   font-size: 10px;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent-gold, #c8a84a);
-  margin-bottom: 14px;
+  color: #c8a84a;
+  border: 0.5px solid rgba(200, 168, 74, 0.3);
+  background: rgba(200, 168, 74, 0.05);
+  border-radius: 3px;
+  padding: 3px 8px;
+  gap: 1rem 0;
+  width: fit-content;
 }
 
 .heading {
