@@ -1,0 +1,26 @@
+/* ─── WebGL canvas layer ─────────────────────────────────────────────────────
+   Sits flush with the parent section (position: relative + z-index: 10 on
+   .section ensures hero copy always renders above this canvas).
+   ──────────────────────────────────────────────────────────────────────────── */
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: -10;
+
+  padding: 10% 0;
+
+  /* Soft vignette so edges bleed into the page background */
+  mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 50%,
+    black 40%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 50%,
+    black 40%,
+    transparent 100%
+  );
+}

@@ -1,8 +1,8 @@
 /* ─── Section wrapper ───────────────────────────────────────────────────────── */
 .section {
   padding: 5% 5%;
-  max-width: 88rem;
   margin: 0 auto;
+  height: 100vh;
   width: 100%;
   position: relative;
   z-index: 10;

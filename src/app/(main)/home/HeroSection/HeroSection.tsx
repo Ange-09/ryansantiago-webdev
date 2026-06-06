@@ -1,5 +1,6 @@
 import styles from "./HeroSection.module.css";
 import Link from "next/link";
+import HeroBackground from "./HeroBackground";
 
 export default function HeroSection() {
   return (
@@ -8,6 +9,9 @@ export default function HeroSection() {
       className={styles.section}
       aria-labelledby="hero-heading"
     >
+      {/* WebGL plasma-waveform background — renders below all hero content */}
+      <HeroBackground />
+
       <div className={styles.layout}>
         <div className={styles.copy}>
           <h1 id="hero-heading" className={styles.heading}>
@@ -30,7 +34,7 @@ export default function HeroSection() {
 
             <Link href="/contact">
               <button className={styles.btnGhost} type="button">
-                Let's Connect
+                Let&apos;s Connect
               </button>
             </Link>
           </div>
