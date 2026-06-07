@@ -10,7 +10,7 @@
   display: block;
   z-index: -10;
 
-  padding: 10% 0;
+  padding: 5% 0;
 
   /* Soft vignette so edges bleed into the page background */
   mask-image: radial-gradient(
