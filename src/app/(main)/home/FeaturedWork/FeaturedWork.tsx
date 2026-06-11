@@ -1,14 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { PROJECTS } from "@/app/(main)/compositions/ProjectsSection/ProjectData";
 import type { Project } from "@/app/(main)/compositions/ProjectsSection/ProjectData";
 import ProjectCard from "@/app/(main)/compositions/ProjectCard/ProjectCard";
+import ProjectModal from "@/app/(main)/compositions/ProjectCard/ProjectModal/ProjectModal";
 import styles from "./FeaturedWork.module.css";
 
 export default function FeaturedWork() {
-  const router = useRouter();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const featured = PROJECTS.filter((p: Project) => p.isFeatured).slice(0, 5);
 
   return (
@@ -34,7 +35,7 @@ export default function FeaturedWork() {
               <ProjectCard
                 key={project.id}
                 project={project}
-                onOpen={(p: Project) => router.push(`/compositions#${p.id}`)}
+                onOpen={(p: Project) => setSelectedProject(p)}
               />
             ))}
           </div>
@@ -50,6 +51,12 @@ export default function FeaturedWork() {
           </Link>
         </div>
       </div>
+
+      {/* ── Modal ── */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }
