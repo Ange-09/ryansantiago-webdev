@@ -1,30 +1,40 @@
 /* ─── Section wrapper ───────────────────────────────────────────────────────── */
 .section {
-  padding: 5% 5%;
-  margin: 0 auto;
-  height: 100vh;
-  width: 100%;
   position: relative;
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
   z-index: 10;
+  display: flex;
+  align-items: center;
 }
 
 /* ─── Layout ─────────────────────────────────────────────────────────────────── */
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 716px;
   align-items: center;
-  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 7rem 10% 0;
+  gap: 2.5rem;
 }
 
-/* ─── Copy column ───────────────────────────────────────────────────────────── */
+/* ─── Copy row (heading+sub left, CTAs right) ───────────────────────────────── */
 .copy {
   display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 100%;
+}
+
+.copyText {
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  text-align: center;
-  max-width: 48rem;
+  gap: 1rem;
+  width: 70%;
 }
 
 /* ─── Heading ───────────────────────────────────────────────────────────────── */
@@ -43,19 +53,19 @@
 /* ─── Sub-copy ──────────────────────────────────────────────────────────────── */
 .subCopy {
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.3;
+  font-size: 1.05rem;
+  line-height: 1.6;
   color: var(--color-text-muted);
-  max-width: 28rem;
 }
 
-/* ─── CTA row ───────────────────────────────────────────────────────────────── */
+/* ─── CTA column ────────────────────────────────────────────────────────────── */
 .ctaRow {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 2rem;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .btnPrimary {
@@ -66,9 +76,11 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.75rem;
   border-radius: var(--radius-base);
+  white-space: nowrap;
   transition: opacity 0.2s ease;
+  width: 100%;
 }
 
 .btnPrimary:hover {
@@ -76,6 +88,7 @@
 }
 
 .btnGhost {
+  width: 100%;
   background-color: rgba(168, 192, 216, 0.06);
   border: var(--border-width) solid var(--color-border-ui);
   color: var(--color-accent-silver);
@@ -84,8 +97,9 @@
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.75rem;
   border-radius: var(--radius-base);
+  white-space: nowrap;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -94,4 +108,63 @@
 .btnGhost:hover {
   background-color: rgba(168, 192, 216, 0.11);
   border-color: var(--color-accent-silver);
+}
+
+/* ─── Image wrapper ─────────────────────────────────────────────────────────── */
+.imageWrapper {
+  position: relative;
+  width: 80%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  padding: 0;
+  box-shadow:
+    0 -8px 40px rgba(200, 168, 74, 0.06),
+    0 -2px 0 rgba(200, 168, 74, 0.12),
+    0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .copy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+
+  .ctaRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .layout {
+    padding: 6rem 1.25rem 0;
+    gap: 2rem;
+  }
+
+  .heading {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .subCopy {
+    font-size: 0.95rem;
+  }
+
+  .btnPrimary,
+  .btnGhost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    width: 100%;
+  }
 }
