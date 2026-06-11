@@ -14,14 +14,12 @@ export default function HeroSection() {
       <div className={styles.layout}>
         <div className={styles.copy}>
           <h1 id="hero-heading" className={styles.heading}>
-            Fine-tuning systems
+            Transform Your Ideas
             <br />
-            <span className={styles.headingAccent}>& composing solutions.</span>
+            <span className={styles.headingAccent}>
+              Into Digital Solutions.
+            </span>
           </h1>
-
-          <p className={styles.subCopy}>
-            Transform Your Ideas Into Digital Solutions
-          </p>
 
           <div className={styles.ctaRow}>
             <Link href="/contact">
