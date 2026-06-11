@@ -43,13 +43,9 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.imageWrapper}>
-          <Image
-            src="/images/heroobject.png"
-            alt="Portfolio hero visual"
-            fill
-            className={styles.heroImage}
-            priority
-          />
+          <video autoPlay muted loop playsInline className={styles.heroVideo}>
+            <source src="/vid/herovid.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </section>
