@@ -29,7 +29,7 @@
   --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
 
   /* Type scale */
-  --text-hero-name: clamp(40px, 4vw, 60px);
+  --text-hero-name: clamp(37px, 4vw, 53px);
   --text-section-heading: 32px;
   --text-modal-title: 20px;
   --text-nav-link: 13px;

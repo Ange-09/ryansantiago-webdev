@@ -1,7 +1,6 @@
 import styles from "./HeroSection.module.css";
 import Link from "next/link";
 import HeroBackground from "./HeroBackground";
-import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -14,29 +13,25 @@ export default function HeroSection() {
 
       <div className={styles.layout}>
         <div className={styles.copy}>
-          <div className={styles.copyText}>
-            <h1 id="hero-heading" className={styles.heading}>
-              Fine-tuning systems
-              <br />
-              <span className={styles.headingAccent}>
-                & composing solutions.
-              </span>
-            </h1>
-            <p className={styles.subCopy}>
-              Industrial engineer and web developer bridging process design and
-              full-stack execution.
-            </p>
-          </div>
+          <h1 id="hero-heading" className={styles.heading}>
+            Fine-tuning systems
+            <br />
+            <span className={styles.headingAccent}>& composing solutions.</span>
+          </h1>
+
+          <p className={styles.subCopy}>
+            Transform Your Ideas Into Digital Solutions
+          </p>
 
           <div className={styles.ctaRow}>
-            <Link href="/compositions">
+            <Link href="/contact">
               <button className={styles.btnPrimary} type="button">
-                View Compositions
+                Let&apos;s Connect
               </button>
             </Link>
-            <Link href="/contact">
+            <Link href="/background">
               <button className={styles.btnGhost} type="button">
-                Let&apos;s Connect
+                Learn My Background
               </button>
             </Link>
           </div>
