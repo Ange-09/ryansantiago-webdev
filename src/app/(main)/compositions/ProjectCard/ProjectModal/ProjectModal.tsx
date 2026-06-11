@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { type Project } from "../../ProjectsSection/ProjectData";
 import styles from "./ProjectModal.module.css";
 
@@ -11,12 +12,15 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [visible, setVisible] = useState(false);
-
+  const [mounted, setMounted] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!project) return;
+    setMounted(true);
+  }, []);
 
+  useEffect(() => {
+    if (!project) return;
     setVisible(true);
     document.body.style.overflow = "hidden";
   }, [project]);
@@ -29,21 +33,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && visible) {
-        handleClose();
-      }
+      if (e.key === "Escape" && visible) handleClose();
     };
-
     window.addEventListener("keydown", onKey);
-
-    return () => {
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [visible]);
 
-  if (!project || !visible) return null;
+  if (!project || !visible || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       className={`${styles.overlay} ${styles.overlayVisible}`}
       ref={overlayRef}
@@ -81,7 +79,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           <div className={styles.techBlock}>
             <span className={styles.techLabel}>Technologies used</span>
-
             <div className={styles.techPills}>
               {project.tech.map((t) => (
                 <span key={t} className={styles.pill}>
@@ -90,29 +87,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               ))}
             </div>
           </div>
-
           <div className={styles.actions}>
-            {project.projImg ? (
-              <a
-                href={project.projImg}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnPrimary}
-              >
-                View live project
-              </a>
-            ) : (
-              <span className={styles.btnPrimaryDisabled}>No live URL</span>
-            )}
+            <button
+              className={styles.btnPrimary}
+              onClick={() =>
+                window.open(project.projImg, "_blank", "noopener,noreferrer")
+              }
+            >
+              View live project
+            </button>
           </div>
         </div>
 
         {/* RIGHT — Project image */}
         <div className={styles.preview}>
-          {project.projImg ? (
+          {project.imageUrl ? (
             <>
               <img
-                src={project.projImg}
+                src={project.imageUrl}
                 alt={`${project.title} preview`}
                 className={styles.previewImg}
                 draggable={false}
@@ -120,7 +112,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div className={styles.previewOverlay} />
             </>
           ) : (
-            <div className={styles.previewFallback}>
+            <div
+              className={styles.previewFallback}
+              style={{ background: project.coverGradient ?? undefined }}
+            >
               <span className={styles.previewFallbackInitials}>
                 {project.initials ?? project.title.slice(0, 2).toUpperCase()}
               </span>
@@ -128,6 +123,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
