@@ -73,8 +73,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           <h2 className={styles.title}>{project.title}</h2>
 
-          <p className={styles.volume}>{project.volume}</p>
-
           <p className={styles.desc}>{project.description}</p>
 
           <div className={styles.techBlock}>
@@ -91,7 +89,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <button
               className={styles.btnPrimary}
               onClick={() =>
-                window.open(project.projImg, "_blank", "noopener,noreferrer")
+                window.open(project.link, "_blank", "noopener,noreferrer")
               }
             >
               View live project
@@ -101,10 +99,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* RIGHT — Project image */}
         <div className={styles.preview}>
-          {project.imageUrl ? (
+          {project.modalImg ? (
             <>
               <img
-                src={project.imageUrl}
+                src={project.modalImg}
                 alt={`${project.title} preview`}
                 className={styles.previewImg}
                 draggable={false}

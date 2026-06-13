@@ -346,6 +346,11 @@
     width: 100%;
   }
 
+  .formFooter {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
   .row {
     flex-direction: column;
   }

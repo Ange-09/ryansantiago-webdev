@@ -4,15 +4,6 @@
 
 /* ── Keyframes ─────────────────────────────────────────────────────────────── */
 
-@keyframes vinylSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes sheenSwipe {
   from {
     transform: translateX(-120%) skewX(-20deg);
@@ -125,7 +116,7 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.75;
-  filter: grayscale(1);
+  filter: grayscale(0.4);
   transition:
     opacity 0.5s ease,
     filter 0.5s ease;
@@ -195,8 +186,9 @@
   background: rgba(10, 24, 40, 0.82);
   backdrop-filter: blur(6px);
   border: 0.5px solid var(--border-subtle, #1a3050);
+  border-color: rgba(200, 168, 74, 0.65);
   border-radius: 2px;
-  padding: 4px 10px;
+  padding: 3px 5px;
   transition: border-color 0.3s ease;
 }
 
@@ -214,10 +206,6 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent-gold, #c8a84a);
-}
-
-.badge:not(.badgeFeatured) .badgeText {
-  color: var(--text-muted, #5a7a9a);
 }
 
 /* ── Cover bottom meta ─────────────────────────────────────────────────────── */
@@ -340,4 +328,27 @@
 .vinylSpin {
   animation: vinylSpin 3.5s linear infinite;
   transform-origin: center center;
+}
+
+.coverVolume {
+  display: none;
+}
+
+.coverTitle {
+  transform: translateY(0);
+}
+
+.badgeText {
+  font-size: 7px;
+}
+
+.badge {
+  top: 6px;
+  right: 6px;
+  padding: 0px 2px;
+  transition: border-color 0.3s ease;
+}
+
+.hint {
+  display: none;
 }

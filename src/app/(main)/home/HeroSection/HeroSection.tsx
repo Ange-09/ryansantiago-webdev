@@ -29,7 +29,7 @@ export default function HeroSection() {
             </Link>
             <Link href="/background">
               <button className={styles.btnGhost} type="button">
-                Learn My Background
+                My Background
               </button>
             </Link>
           </div>
