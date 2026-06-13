@@ -151,6 +151,6 @@
   }
 
   .imageWrapper {
-    aspect-ratio: 4/3;
+    display: none;
   }
 }
