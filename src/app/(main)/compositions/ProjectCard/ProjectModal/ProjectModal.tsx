@@ -73,8 +73,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           <h2 className={styles.title}>{project.title}</h2>
 
-          <p className={styles.volume}>{project.volume}</p>
-
           <p className={styles.desc}>{project.description}</p>
 
           <div className={styles.techBlock}>

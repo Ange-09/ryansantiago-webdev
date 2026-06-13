@@ -238,6 +238,7 @@
   line-height: 1.75;
   color: var(--text-muted, #6a8faa);
   margin: 0 0 28px;
+  text-align: justify;
 }
 
 /* ── Tech pills ── */
@@ -340,34 +341,24 @@
 .preview {
   flex: 1;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
   background: #04090f;
   min-height: 300px;
 }
 
 .previewImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;
   display: block;
+  width: 100%;
+  height: auto;
 }
 
 .previewOverlay {
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      ellipse 80% 60% at 50% 40%,
-      rgba(200, 168, 74, 0.05) 0%,
-      transparent 70%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(7, 16, 31, 0.1) 0%,
-      rgba(7, 16, 31, 0.5) 100%
-    );
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
   pointer-events: none;
 }
 
