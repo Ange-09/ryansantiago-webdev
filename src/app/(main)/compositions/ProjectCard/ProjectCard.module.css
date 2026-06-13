@@ -329,3 +329,26 @@
   animation: vinylSpin 3.5s linear infinite;
   transform-origin: center center;
 }
+
+.coverVolume {
+  display: none;
+}
+
+.coverTitle {
+  transform: translateY(0);
+}
+
+.badgeText {
+  font-size: 7px;
+}
+
+.badge {
+  top: 6px;
+  right: 6px;
+  padding: 0px 2px;
+  transition: border-color 0.3s ease;
+}
+
+.hint {
+  display: none;
+}
