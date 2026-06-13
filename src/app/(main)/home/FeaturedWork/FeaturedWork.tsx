@@ -10,7 +10,7 @@ import styles from "./FeaturedWork.module.css";
 
 export default function FeaturedWork() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const featured = PROJECTS.filter((p: Project) => p.isFeatured).slice(0, 5);
+  const featured = PROJECTS.filter((p: Project) => p.isFeatured).slice(0, 4);
 
   return (
     <section className={styles.section} aria-labelledby="featured-heading">
@@ -28,7 +28,7 @@ export default function FeaturedWork() {
         {/* ── Shelf ── */}
         <div
           className={styles.shelf}
-          style={{ "--count": featured.length } as React.CSSProperties}
+          style={{ "--count": 3 } as React.CSSProperties}
         >
           <div className={styles.track}>
             {featured.map((project: Project) => (
