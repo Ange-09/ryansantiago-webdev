@@ -50,9 +50,9 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
       <div className={styles.coverWrap}>
         <div className={styles.spine} aria-hidden="true" />
 
-        {project.imageUrl ? (
+        {project.cardImg ? (
           <img
-            src={project.imageUrl}
+            src={project.cardImg}
             alt={project.title}
             className={styles.coverImg}
             draggable={false}
