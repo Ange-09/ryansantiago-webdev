@@ -510,7 +510,7 @@
   }
 
   .gatefold {
-    padding: 24px 14px;
+    padding: 12px 6px;
   }
 
   .sectionHeading {
@@ -533,11 +533,15 @@
   }
 
   .trackMargin {
-    width: 40px;
+    width: 10px;
+  }
+
+  .grooveDot {
+    display: none;
   }
 
   .grooveLine {
-    left: 24px;
+    left: 12px;
   }
 
   .discDivider {
