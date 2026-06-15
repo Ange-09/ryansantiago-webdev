@@ -352,3 +352,9 @@
 .hint {
   display: none;
 }
+
+@media (max-width: 640px) {
+  .badge {
+    display: none;
+  }
+}
