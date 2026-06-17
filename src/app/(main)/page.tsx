@@ -1,5 +1,7 @@
 import HeroSection from "./home/HeroSection/HeroSection";
 import FeaturedWork from "./home/FeaturedWork/FeaturedWork";
+import QuietSignOff from "./home/Outro/QuietSignOff";
+
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -11,7 +13,9 @@ export default function Home() {
       <section className={styles.section}>
         <FeaturedWork />
       </section>
-      <section className={styles.section}></section>
+      <section className={styles.section}>
+        <QuietSignOff />
+      </section>
     </main>
   );
 }
