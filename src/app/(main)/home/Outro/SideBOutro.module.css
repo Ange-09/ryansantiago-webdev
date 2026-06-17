@@ -1,0 +1,96 @@
+.outro {
+  padding: 5% 20%;
+}
+
+.tag {
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold);
+  margin-bottom: 1.125rem;
+}
+
+.tracklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5625rem;
+  max-width: 21.25rem;
+  margin-bottom: 1.375rem;
+  list-style: none;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.trackNum {
+  font-size: 0.625rem;
+  color: var(--color-text-hint);
+  font-variant-numeric: tabular-nums;
+  width: 1rem;
+  flex-shrink: 0;
+}
+
+.trackName {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+  width: 5.625rem;
+  flex-shrink: 0;
+}
+
+.trackLine {
+  flex: 1;
+  height: 0.3125rem;
+  border-radius: 0.125rem;
+  background: var(--color-border);
+}
+
+.trackLinePlayed {
+  background: var(--color-border-ui);
+}
+
+.note {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 18.75rem;
+  margin-bottom: 0.875rem;
+  font-style: italic;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--color-accent-gold);
+  border-bottom: 0.5px solid
+    color-mix(in srgb, var(--color-accent-gold) 35%, transparent);
+  padding-bottom: 0.1875rem;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--color-accent-silver);
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--color-accent-silver) 45%,
+    transparent
+  );
+}
+
+@media (max-width: 640px) {
+  .outro {
+    padding: 1.75rem 1.25rem 1.5rem;
+  }
+
+  .tracklist {
+    max-width: 100%;
+  }
+
+  .trackName {
+    width: 4.5rem;
+  }
+}

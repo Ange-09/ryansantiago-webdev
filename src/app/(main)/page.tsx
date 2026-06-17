@@ -11,6 +11,7 @@ export default function Home() {
       <section className={styles.section}>
         <FeaturedWork />
       </section>
+      <section className={styles.section}></section>
     </main>
   );
 }
