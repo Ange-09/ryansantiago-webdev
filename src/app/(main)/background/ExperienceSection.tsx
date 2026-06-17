@@ -143,17 +143,15 @@ function EducationTrack({ entry }: { entry: EducationEntry }) {
       </div>
 
       <div className={styles.trackBody}>
-        <div className={styles.entryHeader}>
-          <div className={styles.entryHeaderLeft}>
-            <h3 className={styles.roleTitle}>{entry.institution}</h3>
-            {entry.degrees.map((deg) => (
-              <p key={deg} className={styles.roleLabel}>
-                {deg}
-              </p>
-            ))}
+        {entry.degrees.map((deg) => (
+          <div key={deg} className={styles.entryHeader}>
+            <div className={styles.entryHeaderLeft}>
+              <h3 className={styles.roleTitle}>{deg}</h3>
+              <p className={styles.roleLabel}>{entry.institution}</p>
+            </div>
+            <span className={styles.period}>{entry.period}</span>
           </div>
-          <span className={styles.period}>{entry.period}</span>
-        </div>
+        ))}
       </div>
     </article>
   );

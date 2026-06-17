@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
     volume: "A Fish Forecasting Tool for Laguna Lake",
     description:
       "This is Ryan's personal portfolio site, featuring a dark Midnight Jazz theme. It showcases his work as a systems developer, featuring his projects, his professional experience, and a way to get in touch.",
-    tech: ["Nuxt", "GSAP", "Contentful"],
+    tech: ["Next.js", "GSAP", "Contentful"],
     cardImg: "./images/compositions/portfoliologo.png",
     isFeatured: false,
     modalImg: "./images/compositions/portfolio.png",

@@ -339,13 +339,13 @@
 }
 
 .badgeText {
-  font-size: 7px;
+  font-size: 9px;
 }
 
 .badge {
-  top: 6px;
-  right: 6px;
-  padding: 0px 2px;
+  top: 10px;
+  right: 10px;
+  padding: 0px 5px;
   transition: border-color 0.3s ease;
 }
 
@@ -356,5 +356,17 @@
 @media (max-width: 640px) {
   .badge {
     display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .badge {
+    top: 7px;
+    right: 7px;
+    padding: 0px 3px;
+  }
+
+  .badgeText {
+    font-size: 7.5px;
   }
 }

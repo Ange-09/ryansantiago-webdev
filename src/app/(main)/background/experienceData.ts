@@ -136,11 +136,15 @@ export const educationEntries: EducationEntry[] = [
   {
     trackId: "B1",
     institution: "Adamson University",
-    degrees: [
-      "Bachelor of Science in Industrial Engineering — Jul 2025",
-      "Master of Science in Management Engineering — 9 Units Completed",
-    ],
-    period: "2021 – Present",
+    degrees: ["Bachelor of Science in Industrial Engineering"],
+    period: "2021 – 2025",
+  },
+
+  {
+    trackId: "B2",
+    institution: "Adamson University (Completed Units: 9)",
+    degrees: ["Master of Science in Management Engineering"],
+    period: "2025",
   },
 ];
 
