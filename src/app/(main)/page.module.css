@@ -1,14 +1,17 @@
 .main {
   position: relative;
+  scroll-snap-type: y proximity;
 }
 
 .section {
   position: relative;
   z-index: 1;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 .section::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
