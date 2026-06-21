@@ -164,7 +164,7 @@ export default function ContactSection() {
                   className={styles.textarea}
                   id="message"
                   name="message"
-                  placeholder="Tell us about your vision..."
+                  placeholder=""
                   rows={5}
                   value={form.message}
                   onChange={handleChange}
