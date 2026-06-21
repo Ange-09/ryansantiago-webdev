@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "@/app/globals.css";
 
-
 export const metadata: Metadata = {
   title: {
     default: "Ryan Santiago | System Design & Optimization",
@@ -44,8 +43,8 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "favicon.png",
+    icon: "/RS.svg",
+    apple: "/RS.svg",
   },
 };
 
@@ -61,7 +60,7 @@ export default function RootLayout({
         {/* Atmospheric background spotlights */}
         <div className="spotlight-gold" aria-hidden="true" />
         <div className="spotlight-silver" aria-hidden="true" />
- 
+
         {children}
       </body>
     </html>
