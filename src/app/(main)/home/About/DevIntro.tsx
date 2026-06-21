@@ -94,14 +94,14 @@ export default function DevIntro() {
         <p className={styles.tag}>What I build</p>
 
         <h2 className={styles.statement}>
-          I build full-stack web applications, from interface to infrastructure.
+          I design and develop fully functional websites that are built to
+          perform.
         </h2>
 
         <p className={styles.paragraph}>
-          My background in systems and process improvement shapes how I write
-          code — structured, detail-oriented, and built to hold up under
-          real-world use. I care as much about how an application is put
-          together as how it looks.
+          My background in systems and industrial engineering influences how I
+          write code: structured, detail-focused, and built for real-world
+          reliability.
         </p>
 
         <Link href="/background" className={styles.link}>
