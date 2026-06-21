@@ -36,8 +36,15 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.imageWrapper}>
-          <video autoPlay muted loop playsInline className={styles.heroVideo}>
-            <source src="/vid/herovid.mp4" type="video/mp4" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className={styles.heroVideo}
+          >
+            <source src="/vid/herovid.mp4" type="video/mp4 " />{" "}
           </video>
         </div>
       </div>
