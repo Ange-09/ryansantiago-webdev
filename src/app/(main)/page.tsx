@@ -1,6 +1,5 @@
 import HeroSection from "./home/HeroSection/HeroSection";
 import FeaturedWork from "./home/FeaturedWork/FeaturedWork";
-import QuietSignOff from "./home/Outro/QuietSignOff";
 import DevIntro from "./home/About/DevIntro";
 import RevealSection from "./home/RevealSection/RevealSection";
 
