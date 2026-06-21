@@ -50,8 +50,7 @@ export default function QuietSignOff() {
   return (
     <section className={styles.signoff} aria-label="Sign-off">
       <p className={styles.note}>
-        &ldquo;That&apos;s the set. If something here struck a chord, you know
-        where to find me.&rdquo;
+        &ldquo;Feel free to reach out on any platform.&rdquo;
       </p>
 
       <ul className={styles.iconRow}>
@@ -69,10 +68,6 @@ export default function QuietSignOff() {
           </li>
         ))}
       </ul>
-
-      <a href="mailto:angelosantiago3283@gmail.com" className={styles.email}>
-        angelosantiago3283@gmail.com
-      </a>
     </section>
   );
 }
